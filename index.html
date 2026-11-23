@@ -14,97 +14,109 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg); color: var(--text); margin: 0; padding: 0;
-            padding-bottom: 90px; overflow-x: hidden;
+            padding-bottom: 100px; /* Отступ, чтобы низ не перекрывался меню */
+            overflow-x: hidden;
         }
-        .screen { display: none; padding: 24px; max-width: 500px; margin: 0 auto; }
+        
+        /* Экраны */
+        .screen { display: none; padding: 20px; max-width: 500px; margin: 0 auto; }
         .screen.active { display: block; animation: smoothFade 0.5s ease forwards; }
         @keyframes smoothFade { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        h1 { font-family: 'Times New Roman', serif; font-size: 36px; font-weight: 400; margin: 10px 0 8px 0; text-align: center; }
-        .subtitle { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; text-align: center; }
-        .card { background: var(--card); border-radius: 24px; padding: 24px; margin-bottom: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        h1 { font-family: 'Times New Roman', serif; font-size: 34px; font-weight: 400; margin: 10px 0 8px 0; text-align: center; }
+        .subtitle { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; text-align: center; }
         
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-size: 11px; font-weight: 600; color: var(--text-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px;}
+        /* Карточки */
+        .card { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid var(--border); }
+        
+        /* Формы */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 11px; font-weight: 600; color: var(--text-light); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
         input, select, textarea {
-            width: 100%; padding: 18px; border: 1px solid var(--border); border-radius: 16px;
+            width: 100%; padding: 15px; border: 1px solid var(--border); border-radius: 12px;
             font-size: 16px; background: #FAFAFA; outline: none; font-family: inherit; transition: all 0.4s ease;
         }
         input:focus, select:focus, textarea:focus { border-color: var(--gold); background: #fff; }
 
-        .btn { width: 100%; padding: 20px; background: var(--text); color: white; border: none; border-radius: 16px; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; }
+        /* Кнопки */
+        .btn { width: 100%; padding: 16px; background: var(--text); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; }
         .btn:active { transform: scale(0.98); opacity: 0.9; }
         .btn-yellow { background: var(--yellow); color: var(--text); }
+        .btn-good { background: var(--green); color: #2E7D32; }
+        .btn-bad { background: var(--red); color: #C62828; }
 
-        .welcome-container { text-align: center; padding-top: 40px; }
-        .welcome-logo { font-family: 'Times New Roman', serif; font-size: 72px; margin-bottom: 10px; letter-spacing: -2px; cursor: pointer; user-select: none; }
-        .welcome-slogan { color: var(--text-light); letter-spacing: 4px; font-size: 11px; text-transform: uppercase; margin-bottom: 50px; }
-        .welcome-manifest { font-family: 'Times New Roman', serif; font-size: 22px; line-height: 1.4; margin-bottom: 30px; }
+        /* Главная */
+        .welcome-container { text-align: center; padding-top: 20px; }
+        .welcome-logo { font-family: 'Times New Roman', serif; font-size: 64px; margin-bottom: 5px; letter-spacing: -2px; cursor: pointer; user-select: none; }
+        .welcome-slogan { color: var(--text-light); letter-spacing: 4px; font-size: 11px; text-transform: uppercase; margin-bottom: 40px; }
+        .welcome-manifest { font-family: 'Times New Roman', serif; font-size: 20px; line-height: 1.4; margin-bottom: 25px; }
 
-        .menu-category { font-family: 'Times New Roman', serif; font-size: 20px; margin: 35px 0 15px 0; text-align: center; font-style: italic; }
-        .menu-item { background: var(--card); border-radius: 16px; padding: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
-        .menu-price { font-family: 'Times New Roman', serif; font-size: 18px; }
+        /* Меню */
+        .menu-category { font-family: 'Times New Roman', serif; font-size: 18px; margin: 25px 0 10px 0; text-align: center; font-style: italic; }
+        .menu-item { background: var(--card); border-radius: 12px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+        .menu-title { font-size: 15px; }
+        .menu-price { font-family: 'Times New Roman', serif; font-size: 16px; }
 
-        .anxiety-container { background: #FAFAFA; padding: 20px; border-radius: 16px; border: 1px solid var(--border); }
-        .anxiety-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .anxiety-status { font-family: 'Times New Roman', serif; font-size: 18px; color: var(--gold); font-style: italic; }
-        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%; background: #fff; border: 2px solid var(--gold); cursor: pointer; margin-top: -12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        /* Ползунок */
+        .anxiety-container { background: #FAFAFA; padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 10px;}
+        .anxiety-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .anxiety-status { font-family: 'Times New Roman', serif; font-size: 16px; color: var(--gold); font-style: italic; }
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0; padding: 0; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #fff; border: 2px solid var(--gold); cursor: pointer; margin-top: -10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #E0E0E0; border-radius: 2px; }
-        .anxiety-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 10px; }
+        .anxiety-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 5px; }
 
-        .advice-item { padding: 15px 0; border-bottom: 1px solid var(--border); }
+        /* Рекомендации */
+        .advice-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
         .advice-item:last-child { border-bottom: none; }
-        .advice-item h4 { margin: 0 0 5px 0; font-size: 16px; }
+        .advice-item h4 { margin: 0 0 3px 0; font-size: 15px; }
         .advice-item p { margin: 0; font-size: 13px; color: var(--text-light); }
 
-        /* Скрытая админка */
+        /* Скрытая панель */
         #admin-panel { display: none; background: #1E1E1E; color: white; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; overflow-y: auto; padding: 20px; padding-bottom: 100px;}
-        #admin-panel h2 { font-family: 'Times New Roman', serif; font-size: 28px; margin-bottom: 20px; color: var(--yellow); }
+        #admin-panel h2 { font-family: 'Times New Roman', serif; font-size: 26px; margin-bottom: 20px; color: var(--yellow); }
         .admin-card { background: #2A2A2A; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
         .admin-btn { background: var(--gold); color: black; padding: 10px; border-radius: 8px; border: none; font-weight: bold; margin-top: 10px; width: 100%; }
-        .close-admin { position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 30px; cursor: pointer; }
+        .close-admin { position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 30px; cursor: pointer; }
 
-        .nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(249, 248, 246, 0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 12px 0 25px 0; border-top: 1px solid var(--border); z-index: 100; }
-        .nav-btn { background: none; border: none; color: var(--text-light); font-size: 9px; font-weight: 600; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 20%; }
+        /* Навигация */
+        .nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(249, 248, 246, 0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 10px 0 25px 0; border-top: 1px solid var(--border); z-index: 100; }
+        .nav-btn { background: none; border: none; color: var(--text-light); font-size: 9px; font-weight: 600; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; }
         .nav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
         .nav-btn.active { color: var(--text); }
     </style>
 </head>
 <body>
 
-    <!-- СКРЫТАЯ АДМИНКА (Открывается кликом по логотипу) -->
+    <!-- СКРЫТАЯ ПАНЕЛЬ (5 кликов по логотипу Trent) -->
     <div id="admin-panel">
         <button class="close-admin" onclick="closeAdmin()">×</button>
         <h2>Trent Admin</h2>
         
         <div class="admin-card">
-            <div style="color: var(--gold); font-size: 12px; margin-bottom: 10px;">ВЛАДЕЛЕЦ (Аналитика)</div>
-            <div>Всего заходов в приложение: <b>148</b></div>
-            <div>Скачали (добавили на экран): <b>34</b></div>
-            <div>Средний чек: <b>24 500 ₽</b></div>
+            <div style="color: var(--gold); font-size: 11px; margin-bottom: 10px;">ВЛАДЕЛЕЦ (Статистика)</div>
+            <div>Заходов: <b>148</b></div>
+            <div>Записей: <b>34</b></div>
         </div>
 
         <div class="admin-card">
-            <div style="color: var(--gold); font-size: 12px; margin-bottom: 10px;">АДМИНИСТРАТОР (Заявки)</div>
+            <div style="color: var(--gold); font-size: 11px; margin-bottom: 10px;">АДМИНИСТРАТОР (Заявки)</div>
             <div style="border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 10px;">
                 <b>Анна Смирнова</b><br>
-                <span style="font-size: 12px; color: #aaa;">Запись: 25 мая, 14:00 (Отбеливание)</span><br>
-                <span style="font-size: 12px; color: #E8F5E9;">Настрой: Спокойно</span>
-                <button class="admin-btn" onclick="alert('Звонок Анне...')">Позвонить</button>
+                <span style="font-size: 12px; color: #aaa;">25 мая, 14:00</span><br>
+                <button class="admin-btn" onclick="alert('Звонок...')">Позвонить</button>
             </div>
             <div>
                 <b>Иван Петров</b><br>
-                <span style="font-size: 12px; color: #aaa;">Запись: 26 мая, 10:00 (Лечение)</span><br>
-                <span style="font-size: 12px; color: #FFCDD2;">Настрой: Очень боюсь</span>
-                <button class="admin-btn" onclick="alert('Звонок Ивану...')">Позвонить</button>
+                <span style="font-size: 12px; color: #aaa;">26 мая, 10:00</span><br>
+                <button class="admin-btn" onclick="alert('Звонок...')">Позвонить</button>
             </div>
         </div>
 
         <div class="admin-card">
-            <div style="color: var(--gold); font-size: 12px; margin-bottom: 10px;">ВРАЧ (Рекомендации)</div>
+            <div style="color: var(--gold); font-size: 11px; margin-bottom: 10px;">ВРАЧ (Написать рекомендацию)</div>
             <div>Пациент: <b>Анна Смирнова</b></div>
-            <textarea id="doc-advice" placeholder="Например: Используйте пасту для чувствительных зубов 2 раза в день..." style="width: 100%; height: 80px; margin-top: 10px; padding: 10px; border-radius: 8px; border: none; font-family: inherit;"></textarea>
+            <textarea id="doc-advice" placeholder="Текст для пациента..." style="width: 100%; height: 80px; margin-top: 10px; padding: 10px; border-radius: 8px; border: none; font-family: inherit;"></textarea>
             <button class="admin-btn" onclick="saveDocAdvice()">Отправить пациенту</button>
         </div>
     </div>
@@ -112,82 +124,117 @@
     <!-- 1. ГЛАВНАЯ -->
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
-            <!-- Секретный клик по логотипу -->
             <div class="welcome-logo" onclick="secretClick()">Trent</div>
             <div class="welcome-slogan">Dental Boutique</div>
-            <div class="card" style="background: transparent; border: none; box-shadow: none;">
-                <div class="welcome-manifest">Рутина заботы о себе — это вдохновение. Вернуться в стоматологию? С радостью!</div>
-                <button class="btn btn-yellow" onclick="showScreen('booking', document.querySelectorAll('.nav-btn')[1])">Записаться на прием</button>
-            </div>
+            <div class="welcome-manifest">Рутина заботы о себе — это вдохновение. Вернуться в стоматологию? С радостью!</div>
+            <button class="btn btn-yellow" onclick="showScreen('booking', document.querySelectorAll('.nav-btn')[1])">Записаться на прием</button>
         </div>
     </div>
 
     <!-- 2. ЗАПИСЬ -->
     <div id="screen-booking" class="screen">
         <h1>Запись</h1>
-        <div class="subtitle">Выберите удобное время</div>
+        <div class="subtitle">Выберите время</div>
         <div class="card">
             <div class="form-group"><label>Имя</label><input type="text" id="name" placeholder="Ваше имя"></div>
             <div class="form-group"><label>Телефон</label><input type="tel" id="phone" placeholder="+7 (___) ___-__-__"></div>
             <div class="anxiety-container">
                 <div class="anxiety-header">
-                    <span class="anxiety-title">Ваш настрой</span>
+                    <span>Ваш настрой</span>
                     <span id="anxiety-status" class="anxiety-status">Полный покой</span>
                 </div>
                 <input type="range" id="anxiety" min="1" max="5" value="1" step="1" oninput="updateAnxiety()">
+                <div class="anxiety-labels"><span>Спокойно</span><span>Очень боюсь</span></div>
             </div>
             <button class="btn" onclick="saveData()">Записаться</button>
         </div>
     </div>
 
-    <!-- 3. МЕНЮ -->
+    <!-- 3. МЕНЮ (Полный список) -->
     <div id="screen-menu" class="screen">
         <h1>Меню</h1>
         <div class="subtitle">Услуги и цены</div>
-        <div class="menu-item"><div>Консультация</div><div class="menu-price">3 000 ₽</div></div>
-        <div class="menu-item"><div>Гигиена</div><div class="menu-price">15 000 ₽</div></div>
-        <div class="menu-item"><div>Отбеливание</div><div class="menu-price">45 000 ₽</div></div>
+        
+        <div class="menu-category">Консультация</div>
+        <div class="menu-item"><div class="menu-title">Консультация врача</div><div class="menu-price">3 000 ₽</div></div>
+        
+        <div class="menu-category">Диагностика</div>
+        <div class="menu-item"><div class="menu-title">Компьютерная томография</div><div class="menu-price">7 000 ₽</div></div>
+        
+        <div class="menu-category">Терапия</div>
+        <div class="menu-item"><div class="menu-title">Профессиональная гигиена</div><div class="menu-price">15 000 ₽</div></div>
+        <div class="menu-item"><div class="menu-title">Обучение домашней гигиене</div><div class="menu-price">3 000 ₽</div></div>
+        <div class="menu-item"><div class="menu-title">Профессиональное отбеливание</div><div class="menu-price">45 000 ₽</div></div>
+        <div class="menu-item"><div class="menu-title">Лечение кариеса</div><div class="menu-price">от 15 000 ₽</div></div>
+        <div class="menu-item"><div class="menu-title">Художественная реставрация</div><div class="menu-price">от 20 000 ₽</div></div>
+        
+        <div class="menu-category">Ортопедия</div>
+        <div class="menu-item"><div class="menu-title">Винир</div><div class="menu-price">от 85 000 ₽</div></div>
+        <div class="menu-item"><div class="menu-title">Коронка</div><div class="menu-price">75 000 ₽</div></div>
+        
+        <p style="text-align: center; font-size: 11px; color: var(--text-light); margin-top: 20px;">* Не является публичной офертой</p>
     </div>
 
-    <!-- 4. РЕКОМЕНДАЦИИ (Тут появятся записи врача) -->
+    <!-- 4. РЕКОМЕНДАЦИИ -->
     <div id="screen-advice" class="screen">
         <h1>Рекомендации</h1>
-        <div class="subtitle">Ваш уход после визита</div>
+        <div class="subtitle">Ваш уход</div>
         <div class="card" id="patient-advice-list">
             <div class="advice-item">
                 <h4>Общие советы</h4>
-                <p>Пока врач не оставил вам персональных рекомендаций, придерживайтесь стандартного ухода: мягкая щетка и зубная нить.</p>
+                <p>Пока врач не оставил персональных рекомендаций, придерживайтесь стандартного ухода.</p>
             </div>
         </div>
     </div>
 
-    <!-- 5. ЗАБОТА -->
+    <!-- 5. ЗАБОТА (Бонусы и ОТЗЫВЫ) -->
     <div id="screen-bonus" class="screen">
         <h1>Забота</h1>
-        <div class="subtitle">Бонусы</div>
-        <div class="card" style="text-align: center;">
-            <div style="font-size: 64px; color: var(--gold); font-family: 'Times New Roman';">1 500 ₽</div>
-            <p style="color: var(--text-light); font-size: 12px; text-transform: uppercase;">Доступно</p>
+        <div class="subtitle">Бонусы и обратная связь</div>
+        
+        <div class="card" style="text-align: center; padding: 15px;">
+            <div style="font-size: 48px; color: var(--gold); font-family: 'Times New Roman';">1 500 ₽</div>
+            <div style="color: var(--text-light); font-size: 11px; text-transform: uppercase;">Доступно</div>
+        </div>
+
+        <!-- ВОТ ТОТ САМЫЙ БЛОК ОТЗЫВА, КОТОРЫЙ ПОТЕРЯЛСЯ -->
+        <div class="card">
+            <div style="font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 10px;">Как прошел визит?</div>
+            <div style="color: var(--text-light); font-size: 13px; margin-bottom: 15px;">Ваше мнение помогает нам становится лучше.</div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-good" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Спасибо! Ссылка на отзыв отправлена.')">Всё отлично</button>
+                <button class="btn btn-bad" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Администратор свяжется с вами в течение 15 минут.')">Было плохо</button>
+            </div>
         </div>
     </div>
 
     <!-- НАВИГАЦИЯ -->
     <div class="nav">
-        <button class="nav-btn active" onclick="showScreen('home', this)">Главная</button>
-        <button class="nav-btn" onclick="showScreen('booking', this)">Запись</button>
-        <button class="nav-btn" onclick="showScreen('menu', this)">Меню</button>
-        <button class="nav-btn" onclick="showScreen('advice', this)">Рекомендации</button>
-        <button class="nav-btn" onclick="showScreen('bonus', this)">Забота</button>
+        <button class="nav-btn active" onclick="showScreen('home', this)">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Главная
+        </button>
+        <button class="nav-btn" onclick="showScreen('booking', this)">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Запись
+        </button>
+        <button class="nav-btn" onclick="showScreen('menu', this)">
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg> Меню
+        </button>
+        <button class="nav-btn" onclick="showScreen('advice', this)">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg> Советы
+        </button>
+        <button class="nav-btn" onclick="showScreen('bonus', this)">
+            <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg> Забота
+        </button>
     </div>
 
     <script>
-        // Логика переключения экранов
+        // Переключение
         function showScreen(screenId, btn) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('screen-' + screenId).classList.add('active');
             if(btn) btn.classList.add('active');
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }
 
         // Ползунок
@@ -195,11 +242,13 @@
             const val = document.getElementById('anxiety').value;
             const status = document.getElementById('anxiety-status');
             if (val == 1) status.innerText = "Полный покой";
+            if (val == 2) status.innerText = "Легкое волнение";
             if (val == 3) status.innerText = "Нервничаю";
+            if (val == 4) status.innerText = "Боюсь";
             if (val == 5) status.innerText = "Очень боюсь";
         }
 
-        // Запись
+        // Сохранение записи
         function saveData() {
             const name = document.getElementById('name').value;
             if(!name) { alert('Введите имя'); return; }
@@ -207,37 +256,26 @@
             showScreen('home', document.querySelectorAll('.nav-btn')[0]);
         }
 
-        // --- СЕКРЕТНЫЙ ВХОД В АДМИНКУ ---
+        // Секретный вход
         let clickCount = 0;
         let clickTimer;
         function secretClick() {
             clickCount++;
             clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => { clickCount = 0; }, 1000); // Сброс через 1 секунду
-
+            clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
             if (clickCount >= 5) {
                 document.getElementById('admin-panel').style.display = 'block';
                 clickCount = 0;
             }
         }
+        function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
 
-        function closeAdmin() {
-            document.getElementById('admin-panel').style.display = 'none';
-        }
-
-        // --- ЛОГИКА ВРАЧА ---
-        // Врач пишет текст, он сохраняется в память телефона и появляется у пациента
+        // Врач пишет рекомендацию
         function saveDocAdvice() {
             const adviceText = document.getElementById('doc-advice').value;
-            if (!adviceText) {
-                alert('Напишите текст рекомендации!');
-                return;
-            }
+            if (!adviceText) { alert('Напишите текст!'); return; }
             
-            // Сохраняем в память браузера (имитация базы данных)
             localStorage.setItem('trent_patient_advice', adviceText);
-            
-            // Обновляем экран пациента
             renderPatientAdvice();
             
             alert('Рекомендация отправлена пациенту!');
@@ -245,11 +283,10 @@
             closeAdmin();
         }
 
-        // Функция, которая выводит текст врача на экране "Рекомендации"
+        // Вывод рекомендации у пациента
         function renderPatientAdvice() {
             const savedAdvice = localStorage.getItem('trent_patient_advice');
             const container = document.getElementById('patient-advice-list');
-            
             if (savedAdvice) {
                 container.innerHTML = `
                     <div class="advice-item">
@@ -259,8 +296,6 @@
                 `;
             }
         }
-
-        // При загрузке приложения проверяем, есть ли уже рекомендации
         renderPatientAdvice();
     </script>
 </body>
