@@ -3,483 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Trent Dental Boutique</title>
+    <title>Trent Dental</title>
     <style>
+        /* --- БАЗОВЫЕ НАСТРОЙКИ И ЦВЕТА --- */
         :root {
-            --bg: #ffffff;
-            --text: #1a1a1a;
-            --text-light: #888;
-            --border: #e5e5e5;
-            --accent: #000000;
-            --radius: 16px;
+            --bg: #F9F8F6; /* Кремовый */
+            --card: #FFFFFF;
+            --text: #1E1E1E; /* Черный */
+            --text-light: #8A8A8A;
+            --gold: #D4AF37; /* Золото */
+            --yellow: #FCE068; /* Желтый бренд */
+            --border: #EAEAEA;
         }
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f9f9f9; /* Легкий серый фон для контраста с белыми карточками */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
             color: var(--text);
             margin: 0;
             padding: 0;
-            padding-bottom: 80px; /* Место под навигацию */
+            padding-bottom: 85px;
+            overflow-x: hidden;
         }
 
+        /* --- ПЛАВНЫЕ АНИМАЦИИ (0.6s) --- */
         .screen {
             display: none;
-            animation: fadeIn 0.3s ease;
-            padding: 20px;
+            padding: 24px;
             max-width: 500px;
             margin: 0 auto;
         }
-        .screen.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .screen.active {
+            display: block;
+            animation: premiumFade 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes premiumFade {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- ЗАГОЛОВКИ --- */
         h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 20px 0 24px 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin: 10px 0 24px 0;
             letter-spacing: -0.5px;
         }
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 30px;
+        }
 
-        /* Карточки */
+        /* --- КАРТОЧКИ --- */
         .card {
-            background: var(--bg);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            background: var(--card);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             border: 1px solid var(--border);
-            transition: transform 0.2s ease;
         }
 
-        /* Формы */
-        .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: var(--text);
-        }
+        /* --- ФОРМА --- */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 13px; font-weight: 500; color: var(--text-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
         input, select {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             border: 1px solid var(--border);
             border-radius: 12px;
             font-size: 16px;
-            background: #f5f5f5;
-            color: var(--text);
+            background: var(--bg);
             outline: none;
-            transition: border-color 0.2s;
-            appearance: none;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
         }
-        input:focus, select:focus { border-color: var(--accent); background: #fff; }
+        input:focus, select:focus { border-color: var(--text); }
 
-        /* Слайдер */
-        .slider-container {
-            background: #f5f5f5;
-            padding: 16px;
-            border-radius: 12px;
-            margin-top: 8px;
-        }
-        .slider-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        .slider-header span { font-weight: 500; font-size: 14px; }
-        .slider-badge {
-            background: #d4edda;
-            color: #155724;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-            padding: 0;
-            border: none;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: #fff;
-            border: 2px solid var(--accent);
-            cursor: pointer;
-            margin-top: -10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            background: #e0e0e0;
-            border-radius: 2px;
-        }
-        .slider-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--text-light);
-            margin-top: 8px;
-        }
-
-        /* Кнопка */
+        /* --- КНОПКИ --- */
         .btn {
             width: 100%;
-            padding: 16px;
-            background: var(--accent);
+            padding: 18px;
+            background: var(--text);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: opacity 0.3s;
             margin-top: 10px;
         }
-        .btn:active { opacity: 0.8; transform: scale(0.98); }
-        .btn-small {
-            padding: 8px 16px;
-            width: auto;
-            font-size: 14px;
-            border-radius: 20px;
+        .btn:active { opacity: 0.8; }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--text);
+        }
+        .btn-small { padding: 10px 20px; width: auto; font-size: 14px; border-radius: 20px; margin: 0; }
+
+        /* --- ГЛАВНЫЙ ЭКРАН (WELCOME) --- */
+        .welcome-logo {
+            font-family: 'Times New Roman', serif;
+            font-size: 64px;
+            text-align: center;
+            margin-top: 80px;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+        .welcome-slogan {
+            text-align: center;
+            color: var(--text-light);
+            letter-spacing: 3px;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
         }
 
-        /* Меню */
+        /* --- МЕНЮ УСЛУГ --- */
         .menu-category {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
-            color: var(--text-light);
-            margin: 24px 0 12px 4px;
+            color: var(--gold);
+            margin: 30px 0 12px 4px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
         }
         .menu-item {
-            background: var(--bg);
-            border-radius: var(--radius);
-            padding: 16px 20px;
-            margin-bottom: 10px;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border: 1px solid var(--border);
         }
-        .menu-info { flex: 1; padding-right: 10px; }
-        .menu-title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
-        .menu-price { font-size: 16px; font-weight: 500; }
-        .menu-footer { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 30px; }
+        .menu-title { font-size: 16px; margin-bottom: 6px; }
+        .menu-price { font-size: 15px; font-weight: 500; color: var(--text-light); }
 
-        /* Дневник */
-        .diary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .diary-progress { font-size: 14px; color: var(--text-light); }
-        .progress-bar-bg { background: #eee; height: 6px; border-radius: 3px; margin-top: 8px; overflow: hidden; }
-        .progress-bar-fill { background: var(--accent); height: 100%; width: 0%; transition: width 0.3s ease; }
-        
+        /* --- ДНЕВНИК --- */
         .task-item {
             display: flex;
-            align-items: flex-start;
-            padding: 16px;
+            align-items: center;
+            padding: 18px 0;
             border-bottom: 1px solid var(--border);
-            transition: background 0.2s;
+            cursor: pointer;
         }
         .task-item:last-child { border-bottom: none; }
-        .task-item:active { background: #f9f9f9; }
         .checkbox {
-            width: 24px;
-            height: 24px;
+            width: 26px; height: 26px;
             border-radius: 50%;
-            border: 2px solid var(--border);
-            margin-right: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            transition: all 0.2s;
+            border: 1.5px solid var(--border);
+            margin-right: 18px;
+            display: flex; justify-content: center; align-items: center;
+            transition: all 0.4s ease;
         }
-        .checkbox.checked { background: var(--accent); border-color: var(--accent); }
+        .checkbox.checked { background: var(--gold); border-color: var(--gold); }
         .checkbox.checked::after {
-            content: '';
-            width: 6px;
-            height: 12px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-            margin-bottom: 2px;
+            content: ''; width: 6px; height: 12px;
+            border: solid white; border-width: 0 2px 2px 0;
+            transform: rotate(45deg); margin-bottom: 2px;
         }
-        .task-text { flex: 1; }
-        .task-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; transition: color 0.2s; }
+        .task-title { font-size: 16px; transition: color 0.4s; }
         .task-title.done { text-decoration: line-through; color: var(--text-light); }
-        .task-sub { font-size: 13px; color: var(--text-light); }
 
-        /* Бонусы */
-        .bonus-screen { text-align: center; padding-top: 40px; }
-        .bonus-icon { font-size: 48px; margin-bottom: 16px; }
-        .bonus-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
-        .bonus-text { font-size: 15px; color: var(--text-light); line-height: 1.5; margin-bottom: 24px; }
+        /* --- БОНУСЫ И ОТЗЫВЫ --- */
+        .bonus-balance { text-align: center; padding: 40px 0; }
+        .bonus-amount { font-family: 'Times New Roman', serif; font-size: 56px; color: var(--gold); margin-bottom: 10px; }
+        .feedback-btn { display: flex; gap: 10px; margin-top: 20px; }
+        .feedback-btn .btn { flex: 1; padding: 14px; font-size: 15px; }
+        .btn-good { background: #E8F5E9; color: #2E7D32; }
+        .btn-bad { background: #FFEBEE; color: #C62828; }
 
-        /* Навигация */
+        /* --- НАВИГАЦИЯ --- */
         .nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0 20px 0;
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(249, 248, 246, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex; justify-content: space-around;
+            padding: 12px 0 25px 0;
             border-top: 1px solid var(--border);
             z-index: 100;
         }
         .nav-btn {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 11px;
-            font-weight: 500;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 5px;
-            width: 25%;
-            transition: color 0.2s;
+            background: none; border: none; color: var(--text-light);
+            font-size: 11px; font-weight: 500;
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            width: 25%; transition: color 0.3s;
         }
-        .nav-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-        .nav-btn.active { color: var(--accent); }
+        .nav-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+        .nav-btn.active { color: var(--text); }
     </style>
 </head>
 <body>
 
-    <!-- ЭКРАН 1: ЗАПИСЬ -->
-    <div id="screen-booking" class="screen active">
-        <h1>Запись на прием</h1>
+    <!-- ЭКРАН 1: WELCOME (Главная) -->
+    <div id="screen-home" class="screen active">
+        <div class="welcome-logo">Trent</div>
+        <div class="welcome-slogan">Dental Boutique</div>
+        
+        <div class="card" style="text-align: center; padding: 40px 20px;">
+            <h2 style="font-family: 'Times New Roman', serif; font-size: 24px; font-weight: normal; margin-bottom: 10px;">Искусство красивой улыбки</h2>
+            <p style="color: var(--text-light); font-size: 15px; line-height: 1.6; margin-bottom: 30px;">Добро пожаловать в пространство, где забота о зубах превращается в удовольствие.</p>
+            <button class="btn" onclick="showScreen('booking', document.querySelectorAll('.nav-btn')[1])">Записаться на прием</button>
+        </div>
+    </div>
+
+    <!-- ЭКРАН 2: ЗАПИСЬ -->
+    <div id="screen-booking" class="screen">
+        <h1>Запись</h1>
+        <div class="subtitle">Выберите удобное время</div>
         <div class="card">
-            <div class="form-group">
-                <label>Имя</label>
-                <input type="text" id="name" placeholder="Как к вам обращаться">
-            </div>
-            <div class="form-group">
-                <label>Телефон</label>
-                <input type="tel" id="phone" placeholder="+7 900 000-00-00">
-            </div>
-            <div class="form-group">
-                <label>Дата</label>
-                <input type="date" id="date">
-            </div>
+            <div class="form-group"><label>Имя</label><input type="text" id="name" placeholder="Ваше имя"></div>
+            <div class="form-group"><label>Телефон</label><input type="tel" id="phone" placeholder="+7 (___) ___-__-__"></div>
+            <div class="form-group"><label>Дата</label><input type="date" id="date"></div>
             <div class="form-group">
                 <label>Время</label>
                 <select id="time">
                     <option value="">Выберите время</option>
-                    <option>09:00</option>
-                    <option>10:00</option>
-                    <option>11:00</option>
-                    <option>12:00</option>
-                    <option>14:00</option>
-                    <option>15:00</option>
-                    <option>16:00</option>
-                    <option>17:00</option>
+                    <option>09:00</option><option>10:00</option><option>11:00</option>
+                    <option>12:00</option><option>14:00</option><option>15:00</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Услуга</label>
                 <select id="service">
-                    <option value="">Выберите услугу (необязательно)</option>
+                    <option value="">Выберите услугу</option>
                     <option>Консультация врача</option>
                     <option>Компьютерная томография</option>
                     <option>Профессиональная гигиена</option>
-                    <option>Отбеливание</option>
+                    <option>Профессиональное отбеливание</option>
                     <option>Лечение кариеса</option>
                     <option>Винир</option>
                 </select>
             </div>
-
-            <div class="slider-container">
-                <div class="slider-header">
-                    <span>Настрой на визит</span>
-                    <span id="anxiety-badge" class="slider-badge">Спокойно</span>
-                </div>
-                <input type="range" id="anxiety" min="1" max="3" value="1" oninput="updateAnxiety()">
-                <div class="slider-labels">
-                    <span>Спокойно</span>
-                    <span>Очень боюсь</span>
-                </div>
-            </div>
-
-            <button class="btn" onclick="saveData()">Записаться</button>
+            <button class="btn" onclick="saveData()">Подтвердить запись</button>
         </div>
     </div>
 
-    <!-- ЭКРАН 2: ДНЕВНИК -->
-    <div id="screen-diary" class="screen">
-        <h1>Дневник</h1>
-        <div class="card">
-            <div class="diary-header">
-                <span class="diary-progress">Выполнено <span id="done-count">0</span> из <span id="total-count">6</span></span>
-                <span id="progress-percent">0%</span>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progress-bar"></div>
-            </div>
-        </div>
-        
-        <div class="card" style="padding: 0;">
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-text">
-                    <div class="task-title">Использовать мягкую щетку</div>
-                    <div class="task-sub">Первые 3 дня после визита</div>
-                </div>
-            </div>
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-text">
-                    <div class="task-title">Полоскание через 2 часа</div>
-                    <div class="task-sub">Теплый раствор, без сильных движений</div>
-                </div>
-            </div>
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-text">
-                    <div class="task-title">Не есть и не пить горячее</div>
-                    <div class="task-sub">В течение 2 часов</div>
-                </div>
-            </div>
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-text">
-                    <div class="task-title">Не пить кофе, чай и красное вино</div>
-                    <div class="task-sub">Первые 48 часов после отбеливания</div>
-                </div>
-            </div>
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-text">
-                    <div class="task-title">Почистить зубы вечером</div>
-                    <div class="task-sub">Мягко, 2 минуты</div>
-                </div>
-            </div>
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-text">
-                    <div class="task-title">Использовать зубную нить</div>
-                    <div class="task-sub">Аккуратно, без нажима</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ЭКРАН 3: РЕКОМЕНДАЦИИ (МЕНЮ) -->
+    <!-- ЭКРАН 3: МЕНЮ (Все услуги) -->
     <div id="screen-menu" class="screen">
-        <h1>Рекомендации</h1>
+        <h1>Услуги</h1>
+        <div class="subtitle">Наши возможности</div>
         
         <div class="menu-category">Консультация</div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Консультация врача</div>
-                <div class="menu-price">3 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Консультация врача')">Записаться</button>
+            <div><div class="menu-title">Консультация врача</div></div>
+            <div class="menu-price">3 000 ₽</div>
         </div>
 
         <div class="menu-category">Диагностика</div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Компьютерная томография</div>
-                <div class="menu-price">7 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Компьютерная томография')">Записаться</button>
+            <div><div class="menu-title">Компьютерная томография</div></div>
+            <div class="menu-price">7 000 ₽</div>
         </div>
 
         <div class="menu-category">Терапия</div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Профессиональная гигиена</div>
-                <div class="menu-price">15 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Профессиональная гигиена')">Записаться</button>
+            <div><div class="menu-title">Профессиональная гигиена</div></div>
+            <div class="menu-price">15 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Обучение домашней гигиене</div>
-                <div class="menu-price">3 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Обучение домашней гигиене')">Записаться</button>
+            <div><div class="menu-title">Обучение домашней гигиене</div></div>
+            <div class="menu-price">3 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Профессиональное отбеливание</div>
-                <div class="menu-price">45 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Отбеливание')">Записаться</button>
+            <div><div class="menu-title">Профессиональное отбеливание</div></div>
+            <div class="menu-price">45 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Лечение кариеса</div>
-                <div class="menu-price">от 15 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Лечение кариеса')">Записаться</button>
+            <div><div class="menu-title">Лечение кариеса</div></div>
+            <div class="menu-price">от 15 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Художественная реставрация</div>
-                <div class="menu-price">от 20 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Художественная реставрация')">Записаться</button>
+            <div><div class="menu-title">Художественная реставрация</div></div>
+            <div class="menu-price">от 20 000 ₽</div>
         </div>
 
         <div class="menu-category">Ортопедия</div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Винир</div>
-                <div class="menu-price">от 85 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Винир')">Записаться</button>
+            <div><div class="menu-title">Винир</div></div>
+            <div class="menu-price">от 85 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div class="menu-info">
-                <div class="menu-title">Коронка</div>
-                <div class="menu-price">75 000 ₽</div>
-            </div>
-            <button class="btn btn-small" onclick="bookService('Коронка')">Записаться</button>
+            <div><div class="menu-title">Коронка</div></div>
+            <div class="menu-price">75 000 ₽</div>
         </div>
-
-        <div class="menu-footer">Не является публичной офертой.</div>
+        <p style="text-align: center; font-size: 12px; color: var(--text-light); margin-top: 30px;">* Не является публичной офертой</p>
     </div>
 
-    <!-- ЭКРАН 4: БОНУСЫ -->
+    <!-- ЭКРАН 4: ДНЕВНИК -->
+    <div id="screen-diary" class="screen">
+        <h1>Дневник</h1>
+        <div class="subtitle">Уход после процедуры</div>
+        <div class="card" style="padding: 10px 24px;">
+            <div class="task-item" onclick="toggleTask(this)">
+                <div class="checkbox"></div>
+                <div class="task-title">Использовать мягкую щетку</div>
+            </div>
+            <div class="task-item" onclick="toggleTask(this)">
+                <div class="checkbox"></div>
+                <div class="task-title">Полоскание через 2 часа</div>
+            </div>
+            <div class="task-item" onclick="toggleTask(this)">
+                <div class="checkbox"></div>
+                <div class="task-title">Не пить кофе 48 часов</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЭКРАН 5: БОНУСЫ И ОТЗЫВЫ (Имитация) -->
     <div id="screen-bonus" class="screen">
         <h1>Бонусы</h1>
-        <div class="bonus-screen">
-            <div class="bonus-icon">🎁</div>
-            <div class="bonus-title">Бонусов пока нет</div>
-            <div class="bonus-text">Запишитесь на прием. После оплаты лечения часть суммы будет вернется бонусами.</div>
-            <button class="btn btn-small" onclick="showScreen('booking', document.querySelectorAll('.nav-btn')[0])">Записаться</button>
+        <div class="subtitle">Ваш персональный счет</div>
+        
+        <div class="card bonus-balance">
+            <div class="bonus-amount">1 500 ₽</div>
+            <div style="color: var(--text-light); font-size: 14px;">Доступно для списания</div>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 16px; font-weight: 500; margin-bottom: 10px;">Как прошел визит?</div>
+            <div style="color: var(--text-light); font-size: 14px; margin-bottom: 20px;">Ваше мнение помогает нам становиться лучше. Если что-то пошло не так — мы свяжемся с вами лично.</div>
+            <div class="feedback-btn">
+                <button class="btn btn-good" onclick="alert('Спасибо! Мы отправили вам ссылку на отзыв.')">Всё отлично</button>
+                <button class="btn btn-bad" onclick="alert('Администратор уже получил уведомление и свяжется с вами в течение 15 минут.')">Было плохо</button>
+            </div>
         </div>
     </div>
 
     <!-- НАВИГАЦИЯ -->
     <div class="nav">
-        <button class="nav-btn active" onclick="showScreen('booking', this)">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="15" x2="12" y2="19"></line><line x1="10" y1="17" x2="14" y2="17"></line></svg>
+        <button class="nav-btn" onclick="showScreen('home', this)">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Главная
+        </button>
+        <button class="nav-btn" onclick="showScreen('booking', this)">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             Запись
         </button>
-        <button class="nav-btn" onclick="showScreen('diary', this)">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            Дневник
-        </button>
         <button class="nav-btn" onclick="showScreen('menu', this)">
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-            Рекомендации
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            Услуги
         </button>
         <button class="nav-btn" onclick="showScreen('bonus', this)">
             <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
@@ -488,82 +361,35 @@
     </div>
 
     <script>
-        // Переключение экранов
+        // Плавное переключение экранов
         function showScreen(screenId, btn) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('screen-' + screenId).classList.add('active');
+            
+            const screen = document.getElementById('screen-' + screenId);
+            screen.classList.add('active');
             if(btn) btn.classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        // Слайдер тревожности
-        function updateAnxiety() {
-            const val = document.getElementById('anxiety').value;
-            const badge = document.getElementById('anxiety-badge');
-            if (val == 1) { badge.innerText = "Спокойно"; badge.style.background = "#d4edda"; badge.style.color = "#155724"; }
-            if (val == 2) { badge.innerText = "Нервничаю"; badge.style.background = "#fff3cd"; badge.style.color = "#856404"; }
-            if (val == 3) { badge.innerText = "Очень боюсь"; badge.style.background = "#f8d7da"; badge.style.color = "#721c24"; }
-        }
-
-        // Запись из меню
-        function bookService(serviceName) {
-            showScreen('booking', document.querySelectorAll('.nav-btn')[0]);
-            document.getElementById('service').value = serviceName;
-            // Небольшая анимация привлечения внимания к форме
-            const formCard = document.querySelector('#screen-booking .card');
-            formCard.style.transform = 'scale(1.02)';
-            setTimeout(() => formCard.style.transform = 'scale(1)', 200);
-        }
-
-        // Сохранение формы
-        function saveData() {
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
             
-            if(!name || !phone || !date || !time) { 
-                alert('Пожалуйста, заполните имя, телефон, дату и время.'); 
-                return; 
-            }
-            
-            alert('Спасибо, ' + name + '! Вы записаны на ' + date + ' в ' + time + '.');
-            
-            // Очистка формы
-            document.getElementById('name').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('date').value = '';
-            document.getElementById('time').value = '';
-            document.getElementById('service').value = '';
-            document.getElementById('anxiety').value = 1;
-            updateAnxiety();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Логика дневника
         function toggleTask(element) {
             const checkbox = element.querySelector('.checkbox');
             const title = element.querySelector('.task-title');
-            
             checkbox.classList.toggle('checked');
             title.classList.toggle('done');
-            
-            updateProgress();
         }
 
-        function updateProgress() {
-            const total = document.querySelectorAll('.task-item').length;
-            const done = document.querySelectorAll('.checkbox.checked').length;
-            const percent = Math.round((done / total) * 100);
-            
-            document.getElementById('done-count').innerText = done;
-            document.getElementById('total-count').innerText = total;
-            document.getElementById('progress-percent').innerText = percent + '%';
-            document.getElementById('progress-bar').style.width = percent + '%';
+        // Сохранение записи
+        function saveData() {
+            const name = document.getElementById('name').value;
+            if(!name) { alert('Пожалуйста, укажите имя.'); return; }
+            alert('Спасибо! Мы ждем вас в Trent.');
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            showScreen('home', document.querySelectorAll('.nav-btn')[0]);
         }
-        
-        // Инициализация прогресса при загрузке
-        updateProgress();
     </script>
 </body>
 </html>
