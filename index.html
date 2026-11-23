@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trent Dental</title>
+    <style>
+        body { background-color: #F9F8F6; font-family: sans-serif; padding: 20px; color: #1E1E1E; }
+        .container { max-width: 400px; margin: 0 auto; }
+        h1 { font-family: serif; text-align: center; font-size: 32px; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #B0B0A8; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; margin-bottom: 30px; }
+        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        input { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 15px; background-color: #FCE068; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; color: #1E1E1E; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trent</h1>
+        <div class="subtitle">Join the true care</div>
+        
+        <div class="card">
+            <input type="text" id="name" placeholder="Ваше имя">
+            <input type="tel" id="phone" placeholder="Телефон">
+            <input type="date" id="date">
+            <button onclick="saveData()">Записаться</button>
+        </div>
+    </div>
+
+    <script>
+        function saveData() {
+            const name = document.getElementById('name').value;
+            if(!name) { alert('Пожалуйста, введите имя'); return; }
+            alert('Спасибо, ' + name + '! Вы записаны.');
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+        }
+    </script>
+</body>
+</html>
