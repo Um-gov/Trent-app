@@ -3,31 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trent Dental</title>
+    <title>Trent Dental Boutique</title>
     <style>
-        body { background-color: #F9F8F6; font-family: sans-serif; padding: 20px; color: #1E1E1E; }
-        .container { max-width: 400px; margin: 0 auto; }
-        h1 { font-family: serif; text-align: center; font-size: 32px; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #B0B0A8; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; margin-bottom: 30px; }
-        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        input { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 15px; background-color: #FCE068; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; color: #1E1E1E; cursor: pointer; }
+        /* Базовые цвета Trent */
+        :root {
+            --trent-cream: #F9F8F6;
+            --trent-yellow: #FCE068;
+            --trent-black: #1E1E1E;
+            --trent-grey: #B0B0A8;
+        }
+        body { background-color: var(--trent-cream); font-family: sans-serif; margin: 0; padding-bottom: 70px; color: var(--trent-black); }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
+        h1, h2 { font-family: 'Times New Roman', serif; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: var(--trent-grey); text-transform: uppercase; letter-spacing: 2px; font-size: 12px; margin-bottom: 20px; }
+        
+        /* Карточки */
+        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        input, select { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 15px; background-color: var(--trent-yellow); border: none; border-radius: 10px; font-weight: bold; font-size: 16px; color: var(--trent-black); cursor: pointer; }
+        
+        /* Меню услуг */
+        .menu-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .menu-item:last-child { border-bottom: none; }
+        .price { font-weight: bold; }
+
+        /* Дневник */
+        .task-item { display: flex; align-items: center; margin-bottom: 15px; }
+        .task-item input { width: auto; margin-right: 10px; margin-bottom: 0; transform: scale(1.5); }
+
+        /* Навигация внизу */
+        .nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .nav-btn { background: none; color: var(--trent-grey); font-weight: bold; font-size: 14px; border: none; width: auto; }
+        .nav-btn.active { color: var(--trent-black); }
+
+        /* Скрытие экранов */
+        .screen { display: none; }
+        .screen.active { display: block; }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Trent</h1>
-        <div class="subtitle">Join the true care</div>
-        
-        <div class="card">
-            <input type="text" id="name" placeholder="Ваше имя">
-            <input type="tel" id="phone" placeholder="Телефон">
-            <input type="date" id="date">
-            <button onclick="saveData()">Записаться</button>
+        <!-- ЭКРАН 1: ЗАПИСЬ -->
+        <div id="screen-booking" class="screen active">
+            <h1>Trent</h1>
+            <div class="subtitle">Join the true care</div>
+            <div class="card">
+                <input type="text" id="name" placeholder="Ваше имя">
+                <input type="tel" id="phone" placeholder="Телефон">
+                <input type="date" id="date">
+                <select id="service">
+                    <option value="">Выберите услугу</option>
+                    <option value="Консультация">Консультация (3000 ₽)</option>
+                    <option value="Гигиена">Проф. гигиена (15000 ₽)</option>
+                    <option value="Отбеливание">Отбеливание (45000 ₽)</option>
+                </select>
+                
+                <div style="background: #FFF9E0; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                    <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold;">Настрой на визит:</p>
+                    <input type="range" id="anxiety" min="1" max="3" value="2" style="padding: 0; margin: 0;" oninput="updateAnxiety()">
+                    <p id="anxiety-text" style="margin: 5px 0 0 0; font-size: 13px; color: #8a7a3a;">Немного нервничаю — врач будет предупрежден</p>
+                </div>
+
+                <button onclick="saveData()">Записаться</button>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 2: МЕНЮ -->
+        <div id="screen-menu" class="screen">
+            <h1>Menu</h1>
+            <div class="subtitle">Услуги и цены</div>
+            <div class="card">
+                <div class="menu-item"><span>Консультация врача</span><span class="price">3000 ₽</span></div>
+                <div class="menu-item"><span>Компьютерная томография</span><span class="price">7000 ₽</span></div>
+                <div class="menu-item"><span>Профессиональная гигиена</span><span class="price">15000 ₽</span></div>
+                <div class="menu-item"><span>Отбеливание</span><span class="price">45000 ₽</span></div>
+                <div class="menu-item"><span>Лечение кариеса</span><span class="price">от 15000 ₽</span></div>
+                <div class="menu-item"><span>Винир</span><span class="price">от 85000 ₽</span></div>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 3: ДНЕВНИК -->
+        <div id="screen-diary" class="screen">
+            <h1>Дневник</h1>
+            <div class="subtitle">Ваш путь к идеальной улыбке</div>
+            <div class="card">
+                <div class="task-item"><input type="checkbox"><span>Использовать мягкую щетку после процедуры</span></div>
+                <div class="task-item"><input type="checkbox"><span>Полоскание через 2 часа</span></div>
+                <div class="task-item"><input type="checkbox"><span>Записаться на следующий осмотр через 6 мес.</span></div>
+            </div>
         </div>
     </div>
 
+    <!-- Нижняя навигация -->
+    <div class="nav">
+        <button class="nav-btn active" onclick="showScreen('booking', this)">Запись</button>
+        <button class="nav-btn" onclick="showScreen('menu', this)">Меню</button>
+        <button class="nav-btn" onclick="showScreen('diary', this)">Дневник</button>
+    </div>
+
     <script>
+        // Переключение экранов
+        function showScreen(screenId, btn) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('screen-' + screenId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Логика ползунка тревожности
+        function updateAnxiety() {
+            const val = document.getElementById('anxiety').value;
+            const text = document.getElementById('anxiety-text');
+            if (val == 1) text.innerText = "Спокойно — отлично!";
+            if (val == 2) text.innerText = "Немного нервничаю — врач будет предупрежден";
+            if (val == 3) text.innerText = "Очень боюсь — врач будет предупрежден, ничего объяснять не нужно";
+        }
+
+        // Сохранение (пока просто всплывающее окно)
         function saveData() {
             const name = document.getElementById('name').value;
             if(!name) { alert('Пожалуйста, введите имя'); return; }
