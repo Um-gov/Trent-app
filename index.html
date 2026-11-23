@@ -11,10 +11,12 @@
             --red: #FFEBEE; --green: #E8F5E9;
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg); color: var(--text); margin: 0; padding: 0;
-            padding-bottom: 100px; /* Отступ, чтобы низ не перекрывался меню */
+            /* ОГРОМНЫЙ ОТСТУП ВНИЗУ, чтобы браузер не перекрывал контент */
+            padding-bottom: 150px; 
             overflow-x: hidden;
         }
         
@@ -80,7 +82,7 @@
         .close-admin { position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 30px; cursor: pointer; }
 
         /* Навигация */
-        .nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(249, 248, 246, 0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 10px 0 25px 0; border-top: 1px solid var(--border); z-index: 100; }
+        .nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(249, 248, 246, 0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 10px 0 20px 0; border-top: 1px solid var(--border); z-index: 100; }
         .nav-btn { background: none; border: none; color: var(--text-light); font-size: 9px; font-weight: 600; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; }
         .nav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
         .nav-btn.active { color: var(--text); }
@@ -150,7 +152,7 @@
         </div>
     </div>
 
-    <!-- 3. МЕНЮ (Полный список) -->
+    <!-- 3. МЕНЮ (ПОЛНЫЙ СПИСОК) -->
     <div id="screen-menu" class="screen">
         <h1>Меню</h1>
         <div class="subtitle">Услуги и цены</div>
@@ -187,7 +189,7 @@
         </div>
     </div>
 
-    <!-- 5. ЗАБОТА (Бонусы и ОТЗЫВЫ) -->
+    <!-- 5. ЗАБОТА (БОНУСЫ И ОТЗЫВЫ) -->
     <div id="screen-bonus" class="screen">
         <h1>Забота</h1>
         <div class="subtitle">Бонусы и обратная связь</div>
@@ -197,7 +199,7 @@
             <div style="color: var(--text-light); font-size: 11px; text-transform: uppercase;">Доступно</div>
         </div>
 
-        <!-- ВОТ ТОТ САМЫЙ БЛОК ОТЗЫВА, КОТОРЫЙ ПОТЕРЯЛСЯ -->
+        <!-- БЛОК ОТЗЫВА -->
         <div class="card">
             <div style="font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 10px;">Как прошел визит?</div>
             <div style="color: var(--text-light); font-size: 13px; margin-bottom: 15px;">Ваше мнение помогает нам становится лучше.</div>
@@ -228,7 +230,6 @@
     </div>
 
     <script>
-        // Переключение
         function showScreen(screenId, btn) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -237,7 +238,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Ползунок
         function updateAnxiety() {
             const val = document.getElementById('anxiety').value;
             const status = document.getElementById('anxiety-status');
@@ -248,7 +248,6 @@
             if (val == 5) status.innerText = "Очень боюсь";
         }
 
-        // Сохранение записи
         function saveData() {
             const name = document.getElementById('name').value;
             if(!name) { alert('Введите имя'); return; }
@@ -256,7 +255,6 @@
             showScreen('home', document.querySelectorAll('.nav-btn')[0]);
         }
 
-        // Секретный вход
         let clickCount = 0;
         let clickTimer;
         function secretClick() {
@@ -270,20 +268,16 @@
         }
         function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
 
-        // Врач пишет рекомендацию
         function saveDocAdvice() {
             const adviceText = document.getElementById('doc-advice').value;
             if (!adviceText) { alert('Напишите текст!'); return; }
-            
             localStorage.setItem('trent_patient_advice', adviceText);
             renderPatientAdvice();
-            
             alert('Рекомендация отправлена пациенту!');
             document.getElementById('doc-advice').value = '';
             closeAdmin();
         }
 
-        // Вывод рекомендации у пациента
         function renderPatientAdvice() {
             const savedAdvice = localStorage.getItem('trent_patient_advice');
             const container = document.getElementById('patient-advice-list');
