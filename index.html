@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Trent Dental</title>
+    <title>Trent Dental Boutique</title>
     <style>
-        /* --- БАЗОВЫЕ НАСТРОЙКИ И ЦВЕТА --- */
+        /* --- БРЕНД-ПЛАТФОРМА TRENT --- */
         :root {
-            --bg: #F9F8F6; /* Кремовый */
-            --card: #FFFFFF;
-            --text: #1E1E1E; /* Черный */
-            --text-light: #8A8A8A;
-            --gold: #D4AF37; /* Золото */
-            --yellow: #FCE068; /* Желтый бренд */
-            --border: #EAEAEA;
+            --bg: #F9F8F6;         /* Кремовый (Место притяжения) */
+            --card: #FFFFFF;       
+            --text: #1E1E1E;       /* Черный (Pantone NB C) */
+            --text-light: #A3A39D; /* Серый (Pantone 7535C) */
+            --yellow: #FCE068;     /* Желтый (Pantone 2002C) */
+            --gold: #D4AF37;       /* Золото */
+            --pink: #F4C2C2;       /* Доп. розовый */
+            --border: #EFEFEF;
         }
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -24,11 +25,11 @@
             color: var(--text);
             margin: 0;
             padding: 0;
-            padding-bottom: 85px;
+            padding-bottom: 90px;
             overflow-x: hidden;
         }
 
-        /* --- ПЛАВНЫЕ АНИМАЦИИ (0.6s) --- */
+        /* --- ПЛАВНЫЕ АНИМАЦИИ --- */
         .screen {
             display: none;
             padding: 24px;
@@ -37,103 +38,89 @@
         }
         .screen.active {
             display: block;
-            animation: premiumFade 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: smoothFade 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
-        @keyframes premiumFade {
-            0% { opacity: 0; transform: translateY(15px); }
+        @keyframes smoothFade {
+            0% { opacity: 0; transform: translateY(10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ЗАГОЛОВКИ --- */
+        /* --- ТИПОГРАФИКА (Как в меню джелатерии) --- */
         h1 {
             font-family: 'Times New Roman', serif;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 400;
-            margin: 10px 0 24px 0;
+            margin: 10px 0 8px 0;
             letter-spacing: -0.5px;
+            text-align: center;
         }
         .subtitle {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-light);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             margin-bottom: 30px;
+            text-align: center;
         }
 
         /* --- КАРТОЧКИ --- */
         .card {
             background: var(--card);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 24px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
             border: 1px solid var(--border);
         }
 
         /* --- ФОРМА --- */
         .form-group { margin-bottom: 20px; }
-        label { display: block; font-size: 13px; font-weight: 500; color: var(--text-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;}
+        label { display: block; font-size: 11px; font-weight: 600; color: var(--text-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px;}
         input, select {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             font-size: 16px;
-            background: var(--bg);
+            background: #FAFAFA;
             outline: none;
-            transition: border-color 0.3s ease;
+            transition: all 0.4s ease;
             font-family: inherit;
         }
-        input:focus, select:focus { border-color: var(--text); }
+        input:focus, select:focus { border-color: var(--gold); background: #fff; }
 
         /* --- КНОПКИ --- */
         .btn {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background: var(--text);
             color: white;
             border: none;
-            border-radius: 14px;
+            border-radius: 16px;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
             margin-top: 10px;
+            letter-spacing: 0.5px;
         }
-        .btn:active { opacity: 0.8; }
-        .btn-outline {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--text);
-        }
-        .btn-small { padding: 10px 20px; width: auto; font-size: 14px; border-radius: 20px; margin: 0; }
+        .btn:active { transform: scale(0.98); opacity: 0.9; }
+        .btn-yellow { background: var(--yellow); color: var(--text); }
 
         /* --- ГЛАВНЫЙ ЭКРАН (WELCOME) --- */
-        .welcome-logo {
-            font-family: 'Times New Roman', serif;
-            font-size: 64px;
-            text-align: center;
-            margin-top: 80px;
-            margin-bottom: 10px;
-            letter-spacing: -2px;
-        }
-        .welcome-slogan {
-            text-align: center;
-            color: var(--text-light);
-            letter-spacing: 3px;
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-bottom: 60px;
-        }
+        .welcome-container { text-align: center; padding-top: 40px; }
+        .welcome-logo { font-family: 'Times New Roman', serif; font-size: 72px; margin-bottom: 10px; letter-spacing: -2px; }
+        .welcome-slogan { color: var(--text-light); letter-spacing: 4px; font-size: 11px; text-transform: uppercase; margin-bottom: 50px; }
+        .welcome-manifest { font-family: 'Times New Roman', serif; font-size: 22px; line-height: 1.4; margin-bottom: 30px; color: var(--text); }
 
         /* --- МЕНЮ УСЛУГ --- */
         .menu-category {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--gold);
-            margin: 30px 0 12px 4px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-family: 'Times New Roman', serif;
+            font-size: 20px;
+            color: var(--text);
+            margin: 35px 0 15px 0;
+            text-align: center;
+            font-style: italic;
         }
         .menu-item {
             background: var(--card);
@@ -143,42 +130,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid var(--border);
-        }
-        .menu-title { font-size: 16px; margin-bottom: 6px; }
-        .menu-price { font-size: 15px; font-weight: 500; color: var(--text-light); }
-
-        /* --- ДНЕВНИК --- */
-        .task-item {
-            display: flex;
-            align-items: center;
-            padding: 18px 0;
             border-bottom: 1px solid var(--border);
-            cursor: pointer;
         }
-        .task-item:last-child { border-bottom: none; }
-        .checkbox {
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            border: 1.5px solid var(--border);
-            margin-right: 18px;
-            display: flex; justify-content: center; align-items: center;
-            transition: all 0.4s ease;
+        .menu-title { font-size: 16px; margin-bottom: 4px; }
+        .menu-price { font-family: 'Times New Roman', serif; font-size: 18px; color: var(--text); }
+
+        /* --- ПОЛЗУНОК ТРЕВОЖНОСТИ (ПЛАВНЫЙ) --- */
+        .anxiety-container { background: #FAFAFA; padding: 20px; border-radius: 16px; border: 1px solid var(--border); }
+        .anxiety-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .anxiety-title { font-size: 14px; font-weight: 600; }
+        .anxiety-status { font-family: 'Times New Roman', serif; font-size: 18px; color: var(--gold); font-style: italic; }
+        
+        input[type=range] {
+            -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0;
         }
-        .checkbox.checked { background: var(--gold); border-color: var(--gold); }
-        .checkbox.checked::after {
-            content: ''; width: 6px; height: 12px;
-            border: solid white; border-width: 0 2px 2px 0;
-            transform: rotate(45deg); margin-bottom: 2px;
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 28px; width: 28px; border-radius: 50%;
+            background: #fff; border: 2px solid var(--gold); cursor: pointer;
+            margin-top: -12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform 0.1s;
         }
-        .task-title { font-size: 16px; transition: color 0.4s; }
-        .task-title.done { text-decoration: line-through; color: var(--text-light); }
+        input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; background: #E0E0E0; border-radius: 2px;
+        }
+        .anxiety-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 10px; text-transform: uppercase; letter-spacing: 0.5px;}
 
         /* --- БОНУСЫ И ОТЗЫВЫ --- */
-        .bonus-balance { text-align: center; padding: 40px 0; }
-        .bonus-amount { font-family: 'Times New Roman', serif; font-size: 56px; color: var(--gold); margin-bottom: 10px; }
-        .feedback-btn { display: flex; gap: 10px; margin-top: 20px; }
-        .feedback-btn .btn { flex: 1; padding: 14px; font-size: 15px; }
+        .bonus-balance { text-align: center; padding: 20px 0; }
+        .bonus-amount { font-family: 'Times New Roman', serif; font-size: 64px; color: var(--gold); margin-bottom: 5px; }
+        .feedback-btn { display: flex; gap: 12px; margin-top: 20px; }
+        .feedback-btn .btn { flex: 1; padding: 16px; font-size: 14px; }
         .btn-good { background: #E8F5E9; color: #2E7D32; }
         .btn-bad { background: #FFEBEE; color: #C62828; }
 
@@ -186,34 +168,35 @@
         .nav {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: rgba(249, 248, 246, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             display: flex; justify-content: space-around;
-            padding: 12px 0 25px 0;
+            padding: 14px 0 30px 0;
             border-top: 1px solid var(--border);
             z-index: 100;
         }
         .nav-btn {
             background: none; border: none; color: var(--text-light);
-            font-size: 11px; font-weight: 500;
-            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
             width: 25%; transition: color 0.3s;
         }
-        .nav-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+        .nav-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; transition: transform 0.3s; }
         .nav-btn.active { color: var(--text); }
+        .nav-btn.active svg { transform: translateY(-2px); }
     </style>
 </head>
 <body>
 
-    <!-- ЭКРАН 1: WELCOME (Главная) -->
+    <!-- ЭКРАН 1: ГЛАВНАЯ (WELCOME) -->
     <div id="screen-home" class="screen active">
-        <div class="welcome-logo">Trent</div>
-        <div class="welcome-slogan">Dental Boutique</div>
-        
-        <div class="card" style="text-align: center; padding: 40px 20px;">
-            <h2 style="font-family: 'Times New Roman', serif; font-size: 24px; font-weight: normal; margin-bottom: 10px;">Искусство красивой улыбки</h2>
-            <p style="color: var(--text-light); font-size: 15px; line-height: 1.6; margin-bottom: 30px;">Добро пожаловать в пространство, где забота о зубах превращается в удовольствие.</p>
-            <button class="btn" onclick="showScreen('booking', document.querySelectorAll('.nav-btn')[1])">Записаться на прием</button>
+        <div class="welcome-container">
+            <div class="welcome-logo">Trent</div>
+            <div class="welcome-slogan">Dental Boutique</div>
+            
+            <div class="card" style="background: transparent; border: none; box-shadow: none;">
+                <div class="welcome-manifest">Рутина заботы о себе — это вдохновение. Вернуться в стоматологию? С радостью!</div>
+                <button class="btn btn-yellow" onclick="showScreen('booking', document.querySelectorAll('.nav-btn')[1])">Записаться на прием</button>
+            </div>
         </div>
     </div>
 
@@ -221,22 +204,27 @@
     <div id="screen-booking" class="screen">
         <h1>Запись</h1>
         <div class="subtitle">Выберите удобное время</div>
+        
         <div class="card">
-            <div class="form-group"><label>Имя</label><input type="text" id="name" placeholder="Ваше имя"></div>
-            <div class="form-group"><label>Телефон</label><input type="tel" id="phone" placeholder="+7 (___) ___-__-__"></div>
-            <div class="form-group"><label>Дата</label><input type="date" id="date"></div>
-            <div class="form-group">
-                <label>Время</label>
-                <select id="time">
-                    <option value="">Выберите время</option>
-                    <option>09:00</option><option>10:00</option><option>11:00</option>
-                    <option>12:00</option><option>14:00</option><option>15:00</option>
-                </select>
+            <div class="form-group"><label>Как к вам обращаться?</label><input type="text" id="name" placeholder="Ваше имя"></div>
+            <div class="form-group"><label>Телефон для связи</label><input type="tel" id="phone" placeholder="+7 (___) ___-__-__"></div>
+            
+            <div style="display: flex; gap: 10px;">
+                <div class="form-group" style="flex: 1;"><label>Дата</label><input type="date" id="date"></div>
+                <div class="form-group" style="flex: 1;"><label>Время</label>
+                    <select id="time">
+                        <option value="">--:--</option>
+                        <option>09:00</option><option>10:00</option><option>11:00</option>
+                        <option>12:00</option><option>14:00</option><option>15:00</option>
+                        <option>16:00</option><option>17:00</option>
+                    </select>
+                </div>
             </div>
+
             <div class="form-group">
-                <label>Услуга</label>
+                <label>Желаемая услуга</label>
                 <select id="service">
-                    <option value="">Выберите услугу</option>
+                    <option value="">Пока не знаю</option>
                     <option>Консультация врача</option>
                     <option>Компьютерная томография</option>
                     <option>Профессиональная гигиена</option>
@@ -245,94 +233,108 @@
                     <option>Винир</option>
                 </select>
             </div>
+
+            <!-- ПЛАВНЫЙ ПОЛЗУНОК -->
+            <div class="anxiety-container">
+                <div class="anxiety-header">
+                    <span class="anxiety-title">Ваш настрой</span>
+                    <span id="anxiety-status" class="anxiety-status">Полный покой</span>
+                </div>
+                <input type="range" id="anxiety" min="1" max="5" value="1" step="1" oninput="updateAnxiety()">
+                <div class="anxiety-labels">
+                    <span>Спокойно</span>
+                    <span>Очень боюсь</span>
+                </div>
+            </div>
+
             <button class="btn" onclick="saveData()">Подтвердить запись</button>
         </div>
     </div>
 
-    <!-- ЭКРАН 3: МЕНЮ (Все услуги) -->
+    <!-- ЭКРАН 3: МЕНЮ (Услуги) -->
     <div id="screen-menu" class="screen">
-        <h1>Услуги</h1>
-        <div class="subtitle">Наши возможности</div>
+        <h1>Меню</h1>
+        <div class="subtitle">Услуги и цены</div>
         
         <div class="menu-category">Консультация</div>
         <div class="menu-item">
-            <div><div class="menu-title">Консультация врача</div></div>
+            <div class="menu-title">Консультация врача</div>
             <div class="menu-price">3 000 ₽</div>
         </div>
 
         <div class="menu-category">Диагностика</div>
         <div class="menu-item">
-            <div><div class="menu-title">Компьютерная томография</div></div>
+            <div class="menu-title">Компьютерная томография</div>
             <div class="menu-price">7 000 ₽</div>
         </div>
 
         <div class="menu-category">Терапия</div>
         <div class="menu-item">
-            <div><div class="menu-title">Профессиональная гигиена</div></div>
+            <div class="menu-title">Профессиональная гигиена</div>
             <div class="menu-price">15 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div><div class="menu-title">Обучение домашней гигиене</div></div>
+            <div class="menu-title">Обучение домашней гигиене</div>
             <div class="menu-price">3 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div><div class="menu-title">Профессиональное отбеливание</div></div>
+            <div class="menu-title">Профессиональное отбеливание</div>
             <div class="menu-price">45 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div><div class="menu-title">Лечение кариеса</div></div>
+            <div class="menu-title">Лечение кариеса</div>
             <div class="menu-price">от 15 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div><div class="menu-title">Художественная реставрация</div></div>
+            <div class="menu-title">Художественная реставрация</div>
             <div class="menu-price">от 20 000 ₽</div>
         </div>
 
         <div class="menu-category">Ортопедия</div>
         <div class="menu-item">
-            <div><div class="menu-title">Винир</div></div>
+            <div class="menu-title">Винир</div>
             <div class="menu-price">от 85 000 ₽</div>
         </div>
         <div class="menu-item">
-            <div><div class="menu-title">Коронка</div></div>
+            <div class="menu-title">Коронка</div>
             <div class="menu-price">75 000 ₽</div>
         </div>
-        <p style="text-align: center; font-size: 12px; color: var(--text-light); margin-top: 30px;">* Не является публичной офертой</p>
+        <p style="text-align: center; font-size: 11px; color: var(--text-light); margin-top: 40px;">* Не является публичной офертой</p>
     </div>
 
     <!-- ЭКРАН 4: ДНЕВНИК -->
     <div id="screen-diary" class="screen">
         <h1>Дневник</h1>
         <div class="subtitle">Уход после процедуры</div>
-        <div class="card" style="padding: 10px 24px;">
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-title">Использовать мягкую щетку</div>
+        <div class="card">
+            <div class="task-item" style="display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border);">
+                <input type="checkbox" style="width: 24px; height: 24px; margin-right: 15px; accent-color: var(--gold);">
+                <div><div style="font-size: 16px;">Использовать мягкую щетку</div><div style="font-size: 12px; color: var(--text-light);">Первые 3 дня</div></div>
             </div>
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-title">Полоскание через 2 часа</div>
+            <div class="task-item" style="display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border);">
+                <input type="checkbox" style="width: 24px; height: 24px; margin-right: 15px; accent-color: var(--gold);">
+                <div><div style="font-size: 16px;">Полоскание через 2 часа</div><div style="font-size: 12px; color: var(--text-light);">Теплый раствор</div></div>
             </div>
-            <div class="task-item" onclick="toggleTask(this)">
-                <div class="checkbox"></div>
-                <div class="task-title">Не пить кофе 48 часов</div>
+            <div class="task-item" style="display: flex; align-items: center; padding: 15px 0;">
+                <input type="checkbox" style="width: 24px; height: 24px; margin-right: 15px; accent-color: var(--gold);">
+                <div><div style="font-size: 16px;">Не пить кофе и вино</div><div style="font-size: 12px; color: var(--text-light);">48 часов после отбеливания</div></div>
             </div>
         </div>
     </div>
 
-    <!-- ЭКРАН 5: БОНУСЫ И ОТЗЫВЫ (Имитация) -->
+    <!-- ЭКРАН 5: БОНУСЫ И ОТЗЫВЫ -->
     <div id="screen-bonus" class="screen">
-        <h1>Бонусы</h1>
-        <div class="subtitle">Ваш персональный счет</div>
+        <h1>Забота</h1>
+        <div class="subtitle">Ваш бонусный счет</div>
         
         <div class="card bonus-balance">
             <div class="bonus-amount">1 500 ₽</div>
-            <div style="color: var(--text-light); font-size: 14px;">Доступно для списания</div>
+            <div style="color: var(--text-light); font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Доступно для списания</div>
         </div>
 
         <div class="card">
-            <div style="font-size: 16px; font-weight: 500; margin-bottom: 10px;">Как прошел визит?</div>
-            <div style="color: var(--text-light); font-size: 14px; margin-bottom: 20px;">Ваше мнение помогает нам становиться лучше. Если что-то пошло не так — мы свяжемся с вами лично.</div>
+            <div style="font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 10px;">Как прошел визит?</div>
+            <div style="color: var(--text-light); font-size: 13px; line-height: 1.5; margin-bottom: 15px;">Ваше мнение помогает нам становится лучше.</div>
             <div class="feedback-btn">
                 <button class="btn btn-good" onclick="alert('Спасибо! Мы отправили вам ссылку на отзыв.')">Всё отлично</button>
                 <button class="btn btn-bad" onclick="alert('Администратор уже получил уведомление и свяжется с вами в течение 15 минут.')">Было плохо</button>
@@ -343,7 +345,7 @@
     <!-- НАВИГАЦИЯ -->
     <div class="nav">
         <button class="nav-btn" onclick="showScreen('home', this)">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
             Главная
         </button>
         <button class="nav-btn" onclick="showScreen('booking', this)">
@@ -352,11 +354,11 @@
         </button>
         <button class="nav-btn" onclick="showScreen('menu', this)">
             <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-            Услуги
+            Меню
         </button>
         <button class="nav-btn" onclick="showScreen('bonus', this)">
             <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
-            Бонусы
+            Забота
         </button>
     </div>
 
@@ -365,29 +367,45 @@
         function showScreen(screenId, btn) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            const screen = document.getElementById('screen-' + screenId);
-            screen.classList.add('active');
+            document.getElementById('screen-' + screenId).classList.add('active');
             if(btn) btn.classList.add('active');
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Логика дневника
-        function toggleTask(element) {
-            const checkbox = element.querySelector('.checkbox');
-            const title = element.querySelector('.task-title');
-            checkbox.classList.toggle('checked');
-            title.classList.toggle('done');
+        // Плавный ползунок (5 уровней)
+        function updateAnxiety() {
+            const val = document.getElementById('anxiety').value;
+            const status = document.getElementById('anxiety-status');
+            
+            if (val == 1) { status.innerText = "Полный покой"; status.style.color = "#2E7D32"; }
+            if (val == 2) { status.innerText = "Легкое волнение"; status.style.color = "#558B2F"; }
+            if (val == 3) { status.innerText = "Нервничаю"; status.style.color = "#F9A825"; }
+            if (val == 4) { status.innerText = "Боюсь"; status.style.color = "#E65100"; }
+            if (val == 5) { status.innerText = "Очень боюсь"; status.style.color = "#C62828"; }
         }
 
-        // Сохранение записи
+        // Сохранение записи с новым сообщением
         function saveData() {
             const name = document.getElementById('name').value;
-            if(!name) { alert('Пожалуйста, укажите имя.'); return; }
-            alert('Спасибо! Мы ждем вас в Trent.');
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            if(!name || !phone || !date || !time) { 
+                alert('Пожалуйста, заполните имя, телефон, дату и время.'); 
+                return; 
+            }
+            
+            // Имитация отправки администратору
+            alert('Спасибо, ' + name + '!\n\nВаша заявка принята. Администратор свяжется с вами в течение 15 минут, чтобы подтвердить время и выделить вам визит.');
+            
+            // Очистка
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('time').value = '';
+            document.getElementById('anxiety').value = 1;
+            updateAnxiety();
             showScreen('home', document.querySelectorAll('.nav-btn')[0]);
         }
     </script>
