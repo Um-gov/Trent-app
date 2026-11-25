@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trent Dental Boutique</title>
+    
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1E1E1E">
+
     <style>
         :root {
             --bg: #F9F8F6; --card: #FFFFFF; --text: #1E1E1E; --text-light: #A3A39D;
@@ -15,9 +22,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg); color: var(--text); margin: 0; padding: 0;
-            /* ОГРОМНЫЙ ОТСТУП ВНИЗУ, чтобы браузер не перекрывал контент */
-            padding-bottom: 150px; 
-            overflow-x: hidden;
+            padding-bottom: 150px; overflow-x: hidden;
         }
         
         /* Экраны */
@@ -50,7 +55,12 @@
         /* Главная */
         .welcome-container { text-align: center; padding-top: 20px; }
         .welcome-logo { font-family: 'Times New Roman', serif; font-size: 64px; margin-bottom: 5px; letter-spacing: -2px; cursor: pointer; user-select: none; }
-        .welcome-slogan { color: var(--text-light); letter-spacing: 4px; font-size: 11px; text-transform: uppercase; margin-bottom: 40px; }
+        .welcome-slogan { color: var(--text-light); letter-spacing: 4px; font-size: 11px; text-transform: uppercase; margin-bottom: 30px; }
+        
+        /* Баннер скидки */
+        .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 16px; margin-bottom: 20px; font-weight: 500; font-size: 14px; display: flex; align-items: center; justify-content: space-between; }
+        .promo-banner span { font-size: 24px; margin-right: 10px; }
+
         .welcome-manifest { font-family: 'Times New Roman', serif; font-size: 20px; line-height: 1.4; margin-bottom: 25px; }
 
         /* Меню */
@@ -68,11 +78,14 @@
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #E0E0E0; border-radius: 2px; }
         .anxiety-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 5px; }
 
-        /* Рекомендации */
+        /* Рекомендации и история */
         .advice-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
         .advice-item:last-child { border-bottom: none; }
         .advice-item h4 { margin: 0 0 3px 0; font-size: 15px; }
         .advice-item p { margin: 0; font-size: 13px; color: var(--text-light); }
+        
+        .history-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+        .history-item:last-child { border-bottom: none; }
 
         /* Скрытая панель */
         #admin-panel { display: none; background: #1E1E1E; color: white; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; overflow-y: auto; padding: 20px; padding-bottom: 100px;}
@@ -86,9 +99,31 @@
         .nav-btn { background: none; border: none; color: var(--text-light); font-size: 9px; font-weight: 600; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; }
         .nav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
         .nav-btn.active { color: var(--text); }
+
+        /* Push-уведомление */
+        .push-notification {
+            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-radius: 16px; padding: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 2000; transition: top 0.5s ease; border: 1px solid var(--border); display: flex; align-items: center; gap: 15px;
+        }
+        .push-notification.show { top: 20px; }
+        .push-icon { width: 40px; height: 40px; background: var(--yellow); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-weight: bold; font-family: 'Times New Roman'; font-size: 20px; }
+        .push-text { flex: 1; }
+        .push-title { font-weight: bold; font-size: 14px; margin-bottom: 2px; }
+        .push-desc { font-size: 12px; color: var(--text-light); }
     </style>
 </head>
 <body>
+
+    <!-- Всплывающее уведомление (Push) -->
+    <div id="push" class="push-notification">
+        <div class="push-icon">T</div>
+        <div class="push-text">
+            <div class="push-title">Trent Dental</div>
+            <div class="push-desc">Напоминаем: завтра в 14:00 у вас гигиена. Ждем вас!</div>
+        </div>
+    </div>
 
     <!-- СКРЫТАЯ ПАНЕЛЬ (5 кликов по логотипу Trent) -->
     <div id="admin-panel">
@@ -97,20 +132,16 @@
         
         <div class="admin-card">
             <div style="color: var(--gold); font-size: 11px; margin-bottom: 10px;">ВЛАДЕЛЕЦ (Статистика)</div>
-            <div>Заходов: <b>148</b></div>
+            <div>Скачиваний: <b>148</b></div>
             <div>Записей: <b>34</b></div>
+            <div>Доход: <b>124 500 ₽</b></div>
         </div>
 
         <div class="admin-card">
             <div style="color: var(--gold); font-size: 11px; margin-bottom: 10px;">АДМИНИСТРАТОР (Заявки)</div>
             <div style="border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 10px;">
                 <b>Анна Смирнова</b><br>
-                <span style="font-size: 12px; color: #aaa;">25 мая, 14:00</span><br>
-                <button class="admin-btn" onclick="alert('Звонок...')">Позвонить</button>
-            </div>
-            <div>
-                <b>Иван Петров</b><br>
-                <span style="font-size: 12px; color: #aaa;">26 мая, 10:00</span><br>
+                <span style="font-size: 12px; color: #aaa;">Записалась через приложение (скидка 10%)</span><br>
                 <button class="admin-btn" onclick="alert('Звонок...')">Позвонить</button>
             </div>
         </div>
@@ -128,6 +159,12 @@
         <div class="welcome-container">
             <div class="welcome-logo" onclick="secretClick()">Trent</div>
             <div class="welcome-slogan">Dental Boutique</div>
+            
+            <!-- БАННЕР СТИМУЛА (Заменено на Гигиену) -->
+            <div class="promo-banner">
+                <div><span>🎁</span>Дарим <b>10% скидки</b> на профессиональную гигиену за установку приложения!</div>
+            </div>
+
             <div class="welcome-manifest">Рутина заботы о себе — это вдохновение. Вернуться в стоматологию? С радостью!</div>
             <button class="btn btn-yellow" onclick="showScreen('booking', document.querySelectorAll('.nav-btn')[1])">Записаться на прием</button>
         </div>
@@ -148,11 +185,11 @@
                 <input type="range" id="anxiety" min="1" max="5" value="1" step="1" oninput="updateAnxiety()">
                 <div class="anxiety-labels"><span>Спокойно</span><span>Очень боюсь</span></div>
             </div>
-            <button class="btn" onclick="saveData()">Записаться</button>
+            <button class="btn" onclick="saveData()">Записаться (Со скидкой 10%)</button>
         </div>
     </div>
 
-    <!-- 3. МЕНЮ (ПОЛНЫЙ СПИСОК) -->
+    <!-- 3. МЕНЮ -->
     <div id="screen-menu" class="screen">
         <h1>Меню</h1>
         <div class="subtitle">Услуги и цены</div>
@@ -177,35 +214,53 @@
         <p style="text-align: center; font-size: 11px; color: var(--text-light); margin-top: 20px;">* Не является публичной офертой</p>
     </div>
 
-    <!-- 4. РЕКОМЕНДАЦИИ -->
-    <div id="screen-advice" class="screen">
-        <h1>Рекомендации</h1>
-        <div class="subtitle">Ваш уход</div>
-        <div class="card" id="patient-advice-list">
+    <!-- 4. ЛИЧНЫЙ КАБИНЕТ / ИСТОРИЯ -->
+    <div id="screen-account" class="screen">
+        <h1>Личный кабинет</h1>
+        <div class="subtitle">Ваша история</div>
+        
+        <div class="card">
+            <div style="font-family: 'Times New Roman', serif; font-size: 18px; margin-bottom: 15px;">История лечения</div>
+            <div class="history-item">
+                <div><b>15 мая</b><br><span style="color: var(--text-light); font-size: 12px;">Профессиональная гигиена</span></div>
+                <button style="background: none; border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; font-size: 12px;" onclick="alert('Открываю снимок...')">Снимок</button>
+            </div>
+            <div class="history-item">
+                <div><b>10 апреля</b><br><span style="color: var(--text-light); font-size: 12px;">Лечение кариеса (зуб 4.6)</span></div>
+                <button style="background: none; border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; font-size: 12px;" onclick="alert('Открываю снимок...')">Снимок</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="font-family: 'Times New Roman', serif; font-size: 18px; margin-bottom: 10px;">Гайд по уходу</div>
             <div class="advice-item">
-                <h4>Общие советы</h4>
-                <p>Пока врач не оставил персональных рекомендаций, придерживайтесь стандартного ухода.</p>
+                <h4>Правило 2 минут</h4>
+                <p>Чистите зубы мягкой щеткой ровно 2 минуты, чтобы не повредить эмаль.</p>
+            </div>
+            <div class="advice-item">
+                <h4>После отбеливания</h4>
+                <p>Первые 48 часов избегайте кофе, чая и красного вина.</p>
             </div>
         </div>
     </div>
 
-    <!-- 5. ЗАБОТА (БОНУСЫ И ОТЗЫВЫ) -->
+    <!-- 5. ЗАБОТА (БОНУСЫ) -->
     <div id="screen-bonus" class="screen">
         <h1>Забота</h1>
-        <div class="subtitle">Бонусы и обратная связь</div>
+        <div class="subtitle">Бонусы и друзья</div>
         
         <div class="card" style="text-align: center; padding: 15px;">
             <div style="font-size: 48px; color: var(--gold); font-family: 'Times New Roman';">1 500 ₽</div>
-            <div style="color: var(--text-light); font-size: 11px; text-transform: uppercase;">Доступно</div>
+            <div style="color: var(--text-light); font-size: 11px; text-transform: uppercase; margin-bottom: 15px;">Доступно</div>
+            <button class="btn btn-yellow" onclick="alert('Ваша ссылка скопирована! Отправьте другу.')">Пригласить друга (+1000 ₽)</button>
         </div>
 
-        <!-- БЛОК ОТЗЫВА -->
         <div class="card">
             <div style="font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 10px;">Как прошел визит?</div>
-            <div style="color: var(--text-light); font-size: 13px; margin-bottom: 15px;">Ваше мнение помогает нам становится лучше.</div>
+            <div style="color: var(--text-light); font-size: 13px; margin-bottom: 15px;">Оставьте отзыв и получите 500 бонусов на следующий визит.</div>
             <div style="display: flex; gap: 10px;">
-                <button class="btn btn-good" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Спасибо! Ссылка на отзыв отправлена.')">Всё отлично</button>
-                <button class="btn btn-bad" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Администратор свяжется с вами в течение 15 минут.')">Было плохо</button>
+                <button class="btn btn-good" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Спасибо! Ссылка на отзыв отправлена. +500 бонусов.')">Всё отлично</button>
+                <button class="btn btn-bad" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Администратор свяжется с вами.')">Было плохо</button>
             </div>
         </div>
     </div>
@@ -221,15 +276,23 @@
         <button class="nav-btn" onclick="showScreen('menu', this)">
             <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg> Меню
         </button>
-        <button class="nav-btn" onclick="showScreen('advice', this)">
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg> Советы
+        <button class="nav-btn" onclick="showScreen('account', this)">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Кабинет
         </button>
         <button class="nav-btn" onclick="showScreen('bonus', this)">
-            <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg> Забота
+            <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg> Бонусы
         </button>
     </div>
 
     <script>
+        // Эмуляция Push-уведомления (теперь про гигиену)
+        setTimeout(() => {
+            document.getElementById('push').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('push').classList.remove('show');
+            }, 6000);
+        }, 3000);
+
         function showScreen(screenId, btn) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -251,7 +314,7 @@
         function saveData() {
             const name = document.getElementById('name').value;
             if(!name) { alert('Введите имя'); return; }
-            alert('Спасибо, ' + name + '! Администратор свяжется с вами.');
+            alert('Спасибо, ' + name + '! Ваша заявка принята. Скидка 10% на гигиену применена. Администратор свяжется с вами.');
             showScreen('home', document.querySelectorAll('.nav-btn')[0]);
         }
 
@@ -272,25 +335,10 @@
             const adviceText = document.getElementById('doc-advice').value;
             if (!adviceText) { alert('Напишите текст!'); return; }
             localStorage.setItem('trent_patient_advice', adviceText);
-            renderPatientAdvice();
-            alert('Рекомендация отправлена пациенту!');
+            alert('Рекомендация добавлена в личный кабинет пациента!');
             document.getElementById('doc-advice').value = '';
             closeAdmin();
         }
-
-        function renderPatientAdvice() {
-            const savedAdvice = localStorage.getItem('trent_patient_advice');
-            const container = document.getElementById('patient-advice-list');
-            if (savedAdvice) {
-                container.innerHTML = `
-                    <div class="advice-item">
-                        <h4 style="color: var(--gold);">Личная рекомендация врача</h4>
-                        <p style="color: var(--text); font-size: 15px;">${savedAdvice}</p>
-                    </div>
-                `;
-            }
-        }
-        renderPatientAdvice();
     </script>
 </body>
 </html>
