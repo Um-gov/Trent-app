@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trent Dental Boutique</title>
     
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#FCFAED">
+
     <style>
+        /* ЦВЕТА ИЗ ГАЙДЛАЙНА */
         :root {
-            --bg: #FCFAED;
+            --bg: #FCFAED;           
             --card: #FFFFFF;         
             --text: #272727;         
             --text-light: #AFA998;   
@@ -24,63 +31,44 @@
             padding-bottom: 150px; overflow-x: hidden;
             background-image: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(248, 226, 125, 0.1) 20px, rgba(248, 226, 125, 0.1) 40px);
         }
-        
-        /* ЭКРАН ЗАГРУЗКИ (SPLASH SCREEN) */
+
+        /* ========================================= */
+        /* ЭКРАН ЗАГРУЗКИ (SPLASH SCREEN)            */
+        /* ========================================= */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg);
-            z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
-
-        #splash-screen.hide {
+        
+        /* Анимация плавного исчезновения */
+        #splash-screen.hidden {
             opacity: 0;
             visibility: hidden;
         }
 
-        /* АНИМАЦИЯ ЛОГОТИПА */
-        .logo-svg {
-            width: 160px;
-            height: 220px;
+        .splash-logo {
+            width: 120px;
+            height: auto;
+            animation: pulse 1.5s infinite alternate ease-in-out;
+            color: var(--text);
         }
 
-        /* Контур зуба */
-        .tooth-outline {
-            fill: none;
-            stroke: var(--text);
-            stroke-width: 8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            /* Анимация рисования контура */
-            stroke-dasharray: 800;
-            stroke-dashoffset: 800;
-            animation: drawOutline 1.5s ease forwards;
+        /* Пульсация логотипа */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
         }
 
-        /* Заливка (капля), которая стекает */
-        .tooth-fill {
-            fill: var(--yellow);
-            opacity: 0;
-            /* Анимация проявления и стекания */
-            animation: meltDown 1.5s ease forwards 1.2s;
-        }
+        /* ========================================= */
+        /* ОСНОВНОЙ КОД                              */
+        /* ========================================= */
 
-        @keyframes drawOutline {
-            0% { stroke-dashoffset: 800; }
-            100% { stroke-dashoffset: 0; }
-        }
-
-        @keyframes meltDown {
-            0% { opacity: 0; transform: translateY(-40px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-
-        /* Экраны приложения */
         .screen { display: none; padding: 20px; max-width: 500px; margin: 0 auto; }
         .screen.active { display: block; animation: smoothFade 0.5s ease forwards; }
         @keyframes smoothFade { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -104,14 +92,14 @@
         .btn-good { background: #E8F5E9; color: #2E7D32; }
         .btn-bad { background: #FFEBEE; color: #C62828; }
 
-        .welcome-container { text-align: center; padding-top: 10px; }
+        .welcome-container { text-align: center; padding-top: 20px; }
         .logo-text { font-family: 'Times New Roman', serif; font-size: 64px; margin-bottom: 0; letter-spacing: -2px; color: var(--text); line-height: 1; }
         .logo-text .italic { font-style: italic; }
-        .logo-desc { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
+        .logo-desc { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); margin-bottom: 30px; }
 
         .highlight { background-color: var(--yellow); padding: 0 5px; display: inline; line-height: 1.2; }
         .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 15px; text-align: center; }
-        .welcome-manifest { font-family: 'Times New Roman', serif; font-style: italic; font-size: 18px; line-height: 1.4; margin-bottom: 25px; color: var(--text); }
+        .welcome-manifest { font-family: 'Times New Roman', serif; font-style: italic; font-size: 20px; line-height: 1.4; margin-bottom: 25px; color: var(--text); }
 
         .menu-category { font-family: 'Times New Roman', serif; font-style: italic; font-size: 18px; margin: 25px 0 10px 0; text-align: center; color: var(--text); border-bottom: 1px solid var(--yellow); padding-bottom: 5px;}
         .menu-item { background: var(--card); border-radius: 4px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
@@ -135,6 +123,12 @@
         .history-item:last-child { border-bottom: none; }
         .history-btn { background: none; border: 1px solid var(--text); color: var(--text); border-radius: 0; padding: 5px 10px; font-size: 12px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: bold;}
 
+        #admin-panel { display: none; background: var(--text); color: white; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; overflow-y: auto; padding: 20px; padding-bottom: 100px;}
+        #admin-panel h2 { font-family: 'Times New Roman', serif; font-size: 26px; margin-bottom: 20px; color: var(--yellow); }
+        .admin-card { background: #333; border-radius: 4px; padding: 15px; margin-bottom: 15px; font-family: 'Times New Roman', serif; }
+        .admin-btn { background: var(--yellow); color: var(--text); padding: 10px; border-radius: 0; border: none; font-weight: bold; margin-top: 10px; width: 100%; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase;}
+        .close-admin { position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 30px; cursor: pointer; }
+
         .nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 20px 0; z-index: 100; }
         .nav-btn { background: none; border: none; color: var(--text-light); font-family: 'PT Sans Narrow', sans-serif; font-size: 10px; font-weight: bold; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; transition: color 0.3s;}
         .nav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; transition: stroke 0.3s;}
@@ -155,14 +149,14 @@
 </head>
 <body>
 
-    <!-- ЭКРАН ЗАГРУЗКИ С ЛОГОТИПОМ -->
+    <!-- ЭКРАН ЗАГРУЗКИ (ЛОГОТИП КАПЛЯ) -->
     <div id="splash-screen">
-        <svg class="logo-svg" viewBox="0 0 100 140">
-            <!-- Контур зуба с завитком (мороженое) -->
-            <path class="tooth-outline" d="M 50 10 C 70 10, 85 25, 75 40 C 70 50, 55 45, 55 60 C 55 70, 50 80, 50 80 C 50 80, 45 70, 45 60 C 45 50, 35 50, 30 40 C 25 25, 40 10, 50 10 Z M 50 80 L 40 125 C 38 130, 30 130, 30 120 L 35 80 L 50 80 M 50 80 L 60 125 C 62 130, 70 130, 70 120 L 65 80 L 50 80" />
-            
-            <!-- Заливка, которая стекает вниз -->
-            <path class="tooth-fill" d="M 50 10 C 70 10, 85 25, 75 40 C 70 50, 55 45, 55 60 C 55 70, 50 80, 50 80 C 50 80, 45 70, 45 60 C 45 50, 35 50, 30 40 C 25 25, 40 10, 50 10 Z M 50 80 L 40 125 C 38 130, 30 130, 30 120 L 35 80 L 50 80 M 50 80 L 60 125 C 62 130, 70 130, 70 120 L 65 80 L 50 80" />
+        <!-- Этот SVG рисунок повторяет форму твоего логотипа -->
+        <svg class="splash-logo" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10 C 70 30, 90 60, 90 90 C 90 120, 70 140, 50 140 C 30 140, 10 120, 10 90 C 10 60, 30 30, 50 10 Z" fill="none" stroke="currentColor" stroke-width="5"/>
+            <path d="M 30 90 C 30 110, 70 110, 70 90" fill="none" stroke="currentColor" stroke-width="5"/>
+            <path d="M 50 10 C 50 40, 70 60, 90 60" fill="none" stroke="currentColor" stroke-width="5"/>
+            <path d="M 50 10 C 50 40, 30 60, 10 60" fill="none" stroke="currentColor" stroke-width="5"/>
         </svg>
     </div>
 
@@ -175,10 +169,38 @@
         </div>
     </div>
 
+    <!-- СКРЫТАЯ ПАНЕЛЬ -->
+    <div id="admin-panel">
+        <button class="close-admin" onclick="closeAdmin()">×</button>
+        <h2>Trent Admin</h2>
+        
+        <div class="admin-card">
+            <div style="color: var(--yellow); font-size: 12px; margin-bottom: 10px; font-family: 'PT Sans Narrow';">ВЛАДЕЛЕЦ</div>
+            <div>Скачиваний: <b>148</b></div>
+            <div>Записей: <b>34</b></div>
+        </div>
+
+        <div class="admin-card">
+            <div style="color: var(--yellow); font-size: 12px; margin-bottom: 10px; font-family: 'PT Sans Narrow';">АДМИНИСТРАТОР</div>
+            <div style="border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 10px;">
+                <b>Анна Смирнова</b><br>
+                <span style="font-size: 12px; color: #aaa;">Записалась через приложение</span><br>
+                <button class="admin-btn" onclick="alert('Звонок...')">Позвонить</button>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div style="color: var(--yellow); font-size: 12px; margin-bottom: 10px; font-family: 'PT Sans Narrow';">ВРАЧ</div>
+            <div>Пациент: <b>Анна Смирнова</b></div>
+            <textarea id="doc-advice" placeholder="Текст для пациента..." style="width: 100%; height: 80px; margin-top: 10px; padding: 10px; border-radius: 4px; border: none; font-family: inherit;"></textarea>
+            <button class="admin-btn" onclick="saveDocAdvice()">Отправить</button>
+        </div>
+    </div>
+
     <!-- 1. ГЛАВНАЯ -->
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
-            <div class="welcome-logo">
+            <div class="welcome-logo" onclick="secretClick()">
                 <div class="logo-text">T<span class="italic">rent</span></div>
                 <div class="logo-desc">Dental Boutique</div>
             </div>
@@ -218,20 +240,25 @@
         
         <div class="menu-category">Консультация</div>
         <div class="menu-item"><div class="menu-title">Консультация врача</div><div class="menu-price">3 000 ₽</div></div>
+        
         <div class="menu-category">Диагностика</div>
         <div class="menu-item"><div class="menu-title">Компьютерная томография</div><div class="menu-price">7 000 ₽</div></div>
+        
         <div class="menu-category">Терапия</div>
         <div class="menu-item"><div class="menu-title">Профессиональная гигиена</div><div class="menu-price">15 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Обучение домашней гигиене</div><div class="menu-price">3 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Профессиональное отбеливание</div><div class="menu-price">45 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Лечение кариеса</div><div class="menu-price">от 15 000 ₽</div></div>
+        <div class="menu-item"><div class="menu-title">Художественная реставрация</div><div class="menu-price">от 20 000 ₽</div></div>
+        
         <div class="menu-category">Ортопедия</div>
         <div class="menu-item"><div class="menu-title">Винир</div><div class="menu-price">от 85 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Коронка</div><div class="menu-price">75 000 ₽</div></div>
+        
         <p style="text-align: center; font-size: 11px; color: var(--text-light); margin-top: 20px;">* Не является публичной офертой</p>
     </div>
 
-    <!-- 4. ЛИЧНЫЙ КАБИНЕТ -->
+    <!-- 4. КАБИНЕТ -->
     <div id="screen-account" class="screen">
         <h1>Кабинет</h1>
         <div class="subtitle">Ваша история</div>
@@ -239,34 +266,39 @@
             <div style="font-family: 'Times New Roman', serif; font-size: 20px; font-style: italic; margin-bottom: 15px;">История лечения</div>
             <div class="history-item">
                 <div><b>15 мая</b><br><span style="color: var(--text-light); font-size: 12px;">Профессиональная гигиена</span></div>
-                <button class="history-btn">Снимок</button>
+                <button class="history-btn" onclick="alert('Открываю снимок...')">Снимок</button>
             </div>
             <div class="history-item">
                 <div><b>10 апреля</b><br><span style="color: var(--text-light); font-size: 12px;">Лечение кариеса</span></div>
-                <button class="history-btn">Снимок</button>
+                <button class="history-btn" onclick="alert('Открываю снимок...')">Снимок</button>
             </div>
         </div>
+
         <div class="card">
             <div style="font-family: 'Times New Roman', serif; font-size: 20px; font-style: italic; margin-bottom: 10px;">Гайд по уходу</div>
             <div class="advice-item">
                 <h4>Правило 2 минут</h4>
-                <p>Чистите зубы мягкой щеткой ровно 2 минуты, чтобы не повредить эмаль.</p>
-            </div>
-            <div class="advice-item">
-                <h4>После отбеливания</h4>
-                <p>Первые 48 часов избегайте кофе, чая и красного вина.</p>
+                <p>Чистите зубы мягкой щеткой ровно 2 минуты.</p>
             </div>
         </div>
     </div>
 
-    <!-- 5. ЗАБОТА -->
+    <!-- 5. БОНУСЫ -->
     <div id="screen-bonus" class="screen">
         <h1>Забота</h1>
         <div class="subtitle">Бонусы и друзья</div>
         <div class="card" style="text-align: center; padding: 15px;">
             <div style="font-size: 56px; color: var(--text); font-family: 'Times New Roman', serif; font-style: italic;">1 500 ₽</div>
             <div style="color: var(--text-light); font-size: 12px; text-transform: uppercase; margin-bottom: 15px; font-family: 'PT Sans Narrow';">Доступно</div>
-            <button class="btn btn-yellow">Пригласить друга (+1000 ₽)</button>
+            <button class="btn btn-yellow" onclick="alert('Ваша ссылка скопирована!')">Пригласить друга (+1000 ₽)</button>
+        </div>
+
+        <div class="card">
+            <div style="font-family: 'Times New Roman', serif; font-size: 20px; margin-bottom: 10px;">Как прошел визит?</div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-good" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Спасибо! +500 бонусов.')">Всё отлично</button>
+                <button class="btn btn-bad" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Администратор свяжется с вами.')">Было плохо</button>
+            </div>
         </div>
     </div>
 
@@ -290,19 +322,20 @@
     </div>
 
     <script>
-        // 1. Логика запуска: Ждем окончания анимации (2.7 секунды) и переключаем на главный экран
+        // --- ЛОГИКА ЭКРАНА ЗАГРУЗКИ ---
         window.addEventListener('load', () => {
+            // Ждем 3 секунды и скрываем экран
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
-                splash.classList.add('hide'); // Плавное исчезновение
+                splash.classList.add('hidden');
                 
-                // Опционально: показываем пуш-уведомление после загрузки
+                // Показываем пуш-уведомление через 1 секунду после заставки
                 setTimeout(() => {
                     document.getElementById('push').classList.add('show');
                     setTimeout(() => { document.getElementById('push').classList.remove('show'); }, 5000);
                 }, 1000);
-
-            }, 2700); // Таймер: 2.7 секунды (контур рисуется 1.5с + заливка стекает 1.2с)
+                
+            }, 3000); // 3 секунды
         });
 
         function showScreen(screenId, btn) {
@@ -328,6 +361,28 @@
             if(!name) { alert('Введите имя'); return; }
             alert('Спасибо, ' + name + '! Заявка принята. Администратор свяжется с вами.');
             showScreen('home', document.querySelectorAll('.nav-btn')[0]);
+        }
+
+        let clickCount = 0;
+        let clickTimer;
+        function secretClick() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
+            if (clickCount >= 5) {
+                document.getElementById('admin-panel').style.display = 'block';
+                clickCount = 0;
+            }
+        }
+        function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
+
+        function saveDocAdvice() {
+            const adviceText = document.getElementById('doc-advice').value;
+            if (!adviceText) { alert('Напишите текст!'); return; }
+            localStorage.setItem('trent_patient_advice', adviceText);
+            alert('Рекомендация добавлена!');
+            document.getElementById('doc-advice').value = '';
+            closeAdmin();
         }
     </script>
 </body>
