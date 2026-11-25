@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trent Dental Boutique</title>
     
-    <!-- Подключаем шрифты строго по гайду -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- PT Sans Narrow (для заголовков и кнопок), PT Serif (для текста) -->
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
     
     <style>
@@ -24,7 +22,6 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            /* Основной шрифт для текста по гайду */
             font-family: 'PT Serif', serif;
             background-color: var(--bg); 
             color: var(--text); margin: 0; padding: 0;
@@ -55,17 +52,16 @@
             animation: fadeInScale 0.8s ease forwards;
         }
 
-        /* Логотип на заставке: PT Sans Narrow, обычный (400), вытянутый за счет узости */
         .splash-logo .logo-text {
             font-family: 'PT Sans Narrow', sans-serif;
-            font-weight: 400; /* Убрали жирность */
+            font-weight: 400;
             font-size: 85px;
             text-transform: uppercase;
-            letter-spacing: 12px; /* Разрядка для элегантности */
+            letter-spacing: 12px;
             color: var(--text);
             line-height: 1;
             margin-bottom: 5px;
-            padding-left: 12px; /* Выравнивание из-за letter-spacing */
+            padding-left: 12px;
         }
 
         .splash-logo .logo-desc {
@@ -88,10 +84,9 @@
         .screen.active { display: block; animation: smoothFade 0.5s ease forwards; }
         @keyframes smoothFade { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        /* Заголовки экранов: PT Sans Narrow */
         h1 { 
             font-family: 'PT Sans Narrow', sans-serif; 
-            font-weight: 700; /* Жирный, как положено заголовкам */
+            font-weight: 700; 
             font-size: 38px; 
             text-transform: uppercase; 
             margin: 10px 0 8px 0; 
@@ -120,7 +115,6 @@
 
         .welcome-container { text-align: center; padding-top: 10px; }
         
-        /* Логотип на главном: PT Sans Narrow */
         .logo-text-main { 
             font-family: 'PT Sans Narrow', sans-serif; 
             font-weight: 400; 
@@ -165,10 +159,28 @@
         .advice-item:last-child { border-bottom: none; }
         .advice-item h4 { font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; text-transform: uppercase; margin: 0 0 5px 0; font-size: 15px; letter-spacing: 1px;}
         .advice-item p { font-family: 'PT Serif', serif; margin: 0; font-size: 15px; color: var(--text); line-height: 1.4;}
-        
-        .history-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 15px; font-family: 'PT Serif', serif;}
+
+        /* История лечения и файлы */
+        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border); font-size: 15px; font-family: 'PT Serif', serif;}
         .history-item:last-child { border-bottom: none; }
-        .history-btn { background: none; border: 1px solid var(--text); color: var(--text); border-radius: 0; padding: 5px 10px; font-size: 12px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;}
+        
+        /* Бейджи для типов записей */
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 2px; font-family: 'PT Sans Narrow', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+        .badge-yellow { background: var(--yellow); color: var(--text); }
+        .badge-grey { background: #F0F0F0; color: var(--text-light); }
+
+        /* Кнопки прикрепленных файлов */
+        .file-btn { 
+            background: none; border: 1px solid var(--text-light); color: var(--text); border-radius: 4px; 
+            padding: 6px 12px; font-size: 13px; font-family: 'PT Sans Narrow', sans-serif; 
+            text-transform: uppercase; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;
+            transition: all 0.3s ease;
+        }
+        .file-btn:hover { background: var(--border); }
+        
+        /* Кнопка для КТ (выделенная) */
+        .file-btn.kt-btn { border-color: var(--text); background: var(--bg); }
+        .file-btn.kt-btn:hover { background: var(--yellow); }
 
         .nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 20px 0; z-index: 100; }
         .nav-btn { background: none; border: none; color: var(--text-light); font-family: 'PT Sans Narrow', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; transition: color 0.3s; letter-spacing: 1px;}
@@ -190,7 +202,6 @@
 </head>
 <body>
 
-    <!-- ЭКРАН ЗАГРУЗКИ -->
     <div id="splash-screen">
         <div class="splash-logo">
             <div class="logo-text">Trent</div>
@@ -198,7 +209,6 @@
         </div>
     </div>
 
-    <!-- Push-уведомление -->
     <div id="push" class="push-notification">
         <div class="push-icon">T</div>
         <div class="push-text">
@@ -267,17 +277,53 @@
     <div id="screen-account" class="screen">
         <h1>Кабинет</h1>
         <div class="subtitle">Ваша история</div>
+        
         <div class="card">
-            <div style="font-family: 'PT Serif', serif; font-size: 20px; font-style: italic; margin-bottom: 15px;">История лечения</div>
+            <div style="font-family: 'PT Serif', serif; font-size: 20px; font-style: italic; margin-bottom: 10px;">История лечения</div>
+            
+            <!-- Запись 1: Консультация с КТ -->
             <div class="history-item">
-                <div><b>15 мая</b><br><span style="color: var(--text-light); font-size: 13px;">Профессиональная гигиена</span></div>
-                <button class="history-btn">Снимок</button>
+                <div>
+                    <span class="badge badge-yellow">Консультация</span><br>
+                    <b>14 июня</b> <br>
+                    <span style="color: var(--text-light); font-size: 13px;">Врач: Смирнов А.В.</span>
+                </div>
+                <!-- Кнопка с иконкой документа для КТ -->
+                <button class="file-btn kt-btn" onclick="alert('Открываю файл КТ (.dcm) для просмотра...')">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    КТ
+                </button>
             </div>
+
+            <!-- Запись 2: Гигиена с фото -->
             <div class="history-item">
-                <div><b>10 апреля</b><br><span style="color: var(--text-light); font-size: 13px;">Лечение кариеса</span></div>
-                <button class="history-btn">Снимок</button>
+                <div>
+                    <span class="badge badge-grey">Гигиена</span><br>
+                    <b>15 мая</b> <br>
+                    <span style="color: var(--text-light); font-size: 13px;">Профессиональная гигиена</span>
+                </div>
+                <!-- Кнопка с иконкой фото -->
+                <button class="file-btn" onclick="alert('Открываю фотографию...')">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    Фото
+                </button>
+            </div>
+
+            <!-- Запись 3: Лечение кариеса с фото -->
+            <div class="history-item">
+                <div>
+                    <span class="badge badge-grey">Лечение</span><br>
+                    <b>10 апреля</b> <br>
+                    <span style="color: var(--text-light); font-size: 13px;">Лечение кариеса</span>
+                </div>
+                <!-- Кнопка с иконкой фото -->
+                <button class="file-btn" onclick="alert('Открываю фотографию...')">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    Фото
+                </button>
             </div>
         </div>
+
         <div class="card">
             <div style="font-family: 'PT Serif', serif; font-size: 20px; font-style: italic; margin-bottom: 10px;">Гайд по уходу</div>
             <div class="advice-item">
@@ -323,7 +369,6 @@
 
     <script>
         window.addEventListener('load', () => {
-            // Таймер заставки: ровно 2 секунды
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
                 splash.classList.add('hide'); 
