@@ -25,7 +25,7 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            font-family: 'PT Sans Narrow', 'Arial Narrow', sans-serif; /* Шрифт заголовков из гайда */
+            font-family: 'PT Sans Narrow', 'Arial Narrow', sans-serif;
             background-color: var(--bg); 
             color: var(--text); margin: 0; padding: 0;
             padding-bottom: 150px; overflow-x: hidden;
@@ -65,22 +65,72 @@
         .btn-bad { background: #FFEBEE; color: #C62828; }
 
         /* Главная (Логотип) */
-        .welcome-container { text-align: center; padding-top: 20px; }
+        .welcome-container { text-align: center; padding-top: 10px; }
         
         /* Имитация логотипа, если нет картинки */
         .logo-text { font-family: 'Times New Roman', serif; font-size: 64px; margin-bottom: 0; letter-spacing: -2px; color: var(--text); line-height: 1; }
         .logo-text .italic { font-style: italic; }
-        .logo-desc { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); margin-bottom: 30px; }
-        
-        /* Если загрузишь картинку, она будет тут */
-        .logo-img { max-width: 200px; margin-bottom: 20px; }
+        .logo-desc { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
+
+        /* --- ГРАФИКА МОРОЖЕНОГО (CSS ART) --- */
+        .icecream-wrapper {
+            position: relative;
+            width: 100px;
+            height: 150px;
+            margin: 10px auto 20px auto;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .icecream-cone {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 70px;
+            height: 90px;
+            background: #E6C583; /* Цвет рожка */
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            z-index: 1;
+        }
+
+        .icecream-scoop {
+            position: absolute;
+            top: 0;
+            left: 5px;
+            width: 90px;
+            height: 90px;
+            background: var(--yellow);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .icecream-drip {
+            position: absolute;
+            background: var(--yellow);
+            border-radius: 0 0 20px 20px;
+            z-index: 3;
+        }
+
+        .drip-1 { bottom: -15px; left: 15px; width: 18px; height: 35px; animation: meltDrip 3s infinite alternate; }
+        .drip-2 { bottom: -5px; left: 40px; width: 14px; height: 20px; animation: meltDrip 4s infinite alternate 0.5s; }
+        .drip-3 { bottom: -20px; left: 65px; width: 14px; height: 40px; animation: meltDrip 3.5s infinite alternate 1s; }
+
+        @keyframes meltDrip {
+            0% { height: 15px; }
+            100% { height: 45px; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        /* ----------------------------------- */
 
         /* Желтая плашка (из гайда) */
         .highlight { background-color: var(--yellow); padding: 0 5px; display: inline; line-height: 1.2; }
 
         .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 15px; text-align: center; }
         
-        .welcome-manifest { font-family: 'Times New Roman', serif; font-style: italic; font-size: 20px; line-height: 1.4; margin-bottom: 25px; color: var(--text); }
+        .welcome-manifest { font-family: 'Times New Roman', serif; font-style: italic; font-size: 18px; line-height: 1.4; margin-bottom: 25px; color: var(--text); }
 
         /* Меню */
         .menu-category { font-family: 'Times New Roman', serif; font-style: italic; font-size: 18px; margin: 25px 0 10px 0; text-align: center; color: var(--text); border-bottom: 1px solid var(--yellow); padding-bottom: 5px;}
@@ -176,14 +226,22 @@
     <!-- 1. ГЛАВНАЯ -->
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
-            <!-- Если загрузишь logo.png, раскомментируй строку ниже и удали блок logo-text -->
-            <!-- <img src="logo.png" alt="Trent" class="logo-img"> -->
             
             <div class="welcome-logo" onclick="secretClick()">
                 <div class="logo-text">T<span class="italic">rent</span></div>
                 <div class="logo-desc">Dental Boutique</div>
             </div>
             
+            <!-- CSS Мороженое -->
+            <div class="icecream-wrapper">
+                <div class="icecream-scoop">
+                    <div class="icecream-drip drip-1"></div>
+                    <div class="icecream-drip drip-2"></div>
+                    <div class="icecream-drip drip-3"></div>
+                </div>
+                <div class="icecream-cone"></div>
+            </div>
+
             <div class="promo-banner">
                 <span class="highlight">Дарим 10% скидки</span><br>на профессиональную гигиену
             </div>
