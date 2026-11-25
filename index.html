@@ -29,56 +29,53 @@
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg);
+            background-color: var(--bg); /* Ваш фирменный бежевый фон */
             z-index: 9999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
+        /* Класс, который скроет экран загрузки */
         #splash-screen.hide {
             opacity: 0;
             visibility: hidden;
         }
 
-        /* АНИМАЦИЯ ЛОГОТИПА */
-        .logo-svg {
-            width: 160px;
-            height: 220px;
+        /* Анимация появления логотипа */
+        .splash-logo {
+            text-align: center;
+            animation: fadeInScale 1.2s ease forwards;
         }
 
-        /* Контур зуба */
-        .tooth-outline {
-            fill: none;
-            stroke: var(--text);
-            stroke-width: 8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            /* Анимация рисования контура */
-            stroke-dasharray: 800;
-            stroke-dashoffset: 800;
-            animation: drawOutline 1.5s ease forwards;
+        .splash-logo .logo-text {
+            font-family: 'Times New Roman', serif;
+            font-size: 80px;
+            letter-spacing: -2px;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 5px;
         }
 
-        /* Заливка (капля), которая стекает */
-        .tooth-fill {
-            fill: var(--yellow);
-            opacity: 0;
-            /* Анимация проявления и стекания */
-            animation: meltDown 1.5s ease forwards 1.2s;
+        .splash-logo .logo-text .italic {
+            font-style: italic;
         }
 
-        @keyframes drawOutline {
-            0% { stroke-dashoffset: 800; }
-            100% { stroke-dashoffset: 0; }
+        .splash-logo .logo-desc {
+            font-family: 'PT Sans Narrow', sans-serif;
+            font-size: 14px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--text);
+            padding-left: 6px; /* Чтобы буквы были ровно по центру */
         }
 
-        @keyframes meltDown {
-            0% { opacity: 0; transform: translateY(-40px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
         }
-
 
         /* Экраны приложения */
         .screen { display: none; padding: 20px; max-width: 500px; margin: 0 auto; }
@@ -105,9 +102,9 @@
         .btn-bad { background: #FFEBEE; color: #C62828; }
 
         .welcome-container { text-align: center; padding-top: 10px; }
-        .logo-text { font-family: 'Times New Roman', serif; font-size: 64px; margin-bottom: 0; letter-spacing: -2px; color: var(--text); line-height: 1; }
-        .logo-text .italic { font-style: italic; }
-        .logo-desc { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
+        .logo-text-main { font-family: 'Times New Roman', serif; font-size: 64px; margin-bottom: 0; letter-spacing: -2px; color: var(--text); line-height: 1; }
+        .logo-text-main .italic { font-style: italic; }
+        .logo-desc-main { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
 
         .highlight { background-color: var(--yellow); padding: 0 5px; display: inline; line-height: 1.2; }
         .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 15px; text-align: center; }
@@ -155,15 +152,12 @@
 </head>
 <body>
 
-    <!-- ЭКРАН ЗАГРУЗКИ С ЛОГОТИПОМ -->
+    <!-- ЭКРАН ЗАГРУЗКИ С ТЕКСТОВЫМ ЛОГОТИПОМ -->
     <div id="splash-screen">
-        <svg class="logo-svg" viewBox="0 0 100 140">
-            <!-- Контур зуба с завитком (мороженое) -->
-            <path class="tooth-outline" d="M 50 10 C 70 10, 85 25, 75 40 C 70 50, 55 45, 55 60 C 55 70, 50 80, 50 80 C 50 80, 45 70, 45 60 C 45 50, 35 50, 30 40 C 25 25, 40 10, 50 10 Z M 50 80 L 40 125 C 38 130, 30 130, 30 120 L 35 80 L 50 80 M 50 80 L 60 125 C 62 130, 70 130, 70 120 L 65 80 L 50 80" />
-            
-            <!-- Заливка, которая стекает вниз -->
-            <path class="tooth-fill" d="M 50 10 C 70 10, 85 25, 75 40 C 70 50, 55 45, 55 60 C 55 70, 50 80, 50 80 C 50 80, 45 70, 45 60 C 45 50, 35 50, 30 40 C 25 25, 40 10, 50 10 Z M 50 80 L 40 125 C 38 130, 30 130, 30 120 L 35 80 L 50 80 M 50 80 L 60 125 C 62 130, 70 130, 70 120 L 65 80 L 50 80" />
-        </svg>
+        <div class="splash-logo">
+            <div class="logo-text">T<span class="italic">rent</span></div>
+            <div class="logo-desc">Dental Boutique</div>
+        </div>
     </div>
 
     <!-- Push-уведомление -->
@@ -179,8 +173,8 @@
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
             <div class="welcome-logo">
-                <div class="logo-text">T<span class="italic">rent</span></div>
-                <div class="logo-desc">Dental Boutique</div>
+                <div class="logo-text-main">T<span class="italic">rent</span></div>
+                <div class="logo-desc-main">Dental Boutique</div>
             </div>
             
             <div class="promo-banner">
@@ -290,19 +284,19 @@
     </div>
 
     <script>
-        // 1. Логика запуска: Ждем окончания анимации (2.7 секунды) и переключаем на главный экран
+        // 1. Логика запуска: Ждем 3 секунды (3000 мс) и убираем экран загрузки
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
-                splash.classList.add('hide'); // Плавное исчезновение
+                splash.classList.add('hide'); // Плавное исчезновение за 0.8 секунды (из CSS)
                 
-                // Опционально: показываем пуш-уведомление после загрузки
+                // Пуш-уведомление вылезет чуть позже, через 2 секунды после открытия главного экрана
                 setTimeout(() => {
                     document.getElementById('push').classList.add('show');
                     setTimeout(() => { document.getElementById('push').classList.remove('show'); }, 5000);
-                }, 1000);
+                }, 2000);
 
-            }, 2700); // Таймер: 2.7 секунды (контур рисуется 1.5с + заливка стекает 1.2с)
+            }, 3000); // Экран заглушка висит ровно 3 секунды
         });
 
         function showScreen(screenId, btn) {
@@ -328,6 +322,19 @@
             if(!name) { alert('Введите имя'); return; }
             alert('Спасибо, ' + name + '! Заявка принята. Администратор свяжется с вами.');
             showScreen('home', document.querySelectorAll('.nav-btn')[0]);
+        }
+
+        // Секретное нажатие на логотип (5 раз) для входа в админку
+        let clickCount = 0;
+        let clickTimer;
+        function secretClick() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
+            if (clickCount >= 5) {
+                document.getElementById('admin-panel').style.display = 'block';
+                clickCount = 0;
+            }
         }
     </script>
 </body>
