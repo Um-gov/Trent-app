@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trent Dental Boutique</title>
     
+    <!-- Подключаем вытянутый шрифт Oswald -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg: #FCFAED;
@@ -18,7 +23,8 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            font-family: 'PT Sans Narrow', 'Arial Narrow', sans-serif;
+            /* Основной шрифт для текста */
+            font-family: 'Oswald', 'Arial Narrow', sans-serif;
             background-color: var(--bg); 
             color: var(--text); margin: 0; padding: 0;
             padding-bottom: 150px; overflow-x: hidden;
@@ -29,7 +35,7 @@
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg); /* Ваш фирменный бежевый фон */
+            background-color: var(--bg);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -38,38 +44,37 @@
             transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
-        /* Класс, который скроет экран загрузки */
         #splash-screen.hide {
             opacity: 0;
             visibility: hidden;
         }
 
-        /* Анимация появления логотипа */
         .splash-logo {
             text-align: center;
             animation: fadeInScale 1.2s ease forwards;
         }
 
+        /* Стили для вытянутого логотипа */
         .splash-logo .logo-text {
-            font-family: 'Times New Roman', serif;
-            font-size: 80px;
-            letter-spacing: -2px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            font-size: 90px; /* Крупный размер */
+            text-transform: uppercase;
+            letter-spacing: 8px; /* Расстояние между буквами */
             color: var(--text);
             line-height: 1;
             margin-bottom: 5px;
-        }
-
-        .splash-logo .logo-text .italic {
-            font-style: italic;
+            transform: scaleY(1.4) scaleX(0.85); /* Вытягиваем вверх и немного сжимаем по бокам */
         }
 
         .splash-logo .logo-desc {
-            font-family: 'PT Sans Narrow', sans-serif;
-            font-size: 14px;
-            letter-spacing: 6px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            letter-spacing: 12px;
             text-transform: uppercase;
-            color: var(--text);
-            padding-left: 6px; /* Чтобы буквы были ровно по центру */
+            color: var(--text-light);
+            padding-left: 12px; /* Компенсация отступа букв */
         }
 
         @keyframes fadeInScale {
@@ -82,58 +87,91 @@
         .screen.active { display: block; animation: smoothFade 0.5s ease forwards; }
         @keyframes smoothFade { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        h1 { font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 32px; text-transform: uppercase; margin: 10px 0 8px 0; text-align: center; letter-spacing: 1px;}
-        .subtitle { font-family: 'Times New Roman', serif; font-size: 14px; color: var(--text-light); font-style: italic; margin-bottom: 25px; text-align: center; }
+        /* Заголовки экранов (тоже вытянутые) */
+        h1 { 
+            font-family: 'Oswald', sans-serif; 
+            font-weight: 500; 
+            font-size: 38px; 
+            text-transform: uppercase; 
+            margin: 10px 0 8px 0; 
+            text-align: center; 
+            letter-spacing: 3px;
+            transform: scaleY(1.1);
+        }
+        
+        .subtitle { font-family: 'PT Serif', serif; font-size: 14px; color: var(--text-light); font-style: italic; margin-bottom: 25px; text-align: center; }
         
         .card { background: var(--card); border-radius: 4px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid var(--border); }
         
         .form-group { margin-bottom: 15px; }
-        label { font-family: 'PT Sans Narrow', sans-serif; display: block; font-size: 12px; font-weight: bold; color: var(--text); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
+        label { font-family: 'Oswald', sans-serif; font-weight: 500; display: block; font-size: 13px; color: var(--text); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px;}
+        
         input, select, textarea {
             width: 100%; padding: 15px; border: 1px solid var(--border); border-radius: 4px;
-            font-size: 16px; background: #F9F9F9; outline: none; font-family: 'Times New Roman', serif; transition: all 0.4s ease;
+            font-size: 16px; background: #F9F9F9; outline: none; font-family: 'PT Serif', serif; transition: all 0.4s ease;
         }
         input:focus, select:focus, textarea:focus { border-color: var(--text); background: #fff; }
 
-        .btn { width: 100%; padding: 16px; background: var(--text); color: white; border: none; border-radius: 4px; font-family: 'PT Sans Narrow', sans-serif; font-size: 16px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; letter-spacing: 1px;}
+        .btn { width: 100%; padding: 16px; background: var(--text); color: white; border: none; border-radius: 4px; font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 16px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; letter-spacing: 2px;}
         .btn:active { transform: scale(0.98); opacity: 0.9; }
         .btn-yellow { background: var(--yellow); color: var(--text); }
         .btn-good { background: #E8F5E9; color: #2E7D32; }
         .btn-bad { background: #FFEBEE; color: #C62828; }
 
         .welcome-container { text-align: center; padding-top: 10px; }
-        .logo-text-main { font-family: 'Times New Roman', serif; font-size: 64px; margin-bottom: 0; letter-spacing: -2px; color: var(--text); line-height: 1; }
-        .logo-text-main .italic { font-style: italic; }
-        .logo-desc-main { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); margin-bottom: 20px; }
+        
+        /* Логотип на главном экране (тоже вытянутый) */
+        .logo-text-main { 
+            font-family: 'Oswald', sans-serif; 
+            font-weight: 500; 
+            font-size: 75px; 
+            text-transform: uppercase; 
+            letter-spacing: 5px;
+            margin-bottom: 0; 
+            color: var(--text); 
+            line-height: 1; 
+            transform: scaleY(1.2);
+        }
+        .logo-desc-main { 
+            font-family: 'Oswald', sans-serif; 
+            font-weight: 300; 
+            font-size: 12px; 
+            letter-spacing: 8px; 
+            text-transform: uppercase; 
+            color: var(--text-light); 
+            margin-bottom: 30px; 
+            padding-left: 8px;
+        }
 
         .highlight { background-color: var(--yellow); padding: 0 5px; display: inline; line-height: 1.2; }
-        .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: 'PT Sans Narrow', sans-serif; font-weight: bold; font-size: 15px; text-align: center; }
-        .welcome-manifest { font-family: 'Times New Roman', serif; font-style: italic; font-size: 18px; line-height: 1.4; margin-bottom: 25px; color: var(--text); }
+        .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 15px; text-align: center; letter-spacing: 1px;}
+        
+        .welcome-manifest { font-family: 'PT Serif', serif; font-style: italic; font-size: 18px; line-height: 1.4; margin-bottom: 25px; color: var(--text); }
 
-        .menu-category { font-family: 'Times New Roman', serif; font-style: italic; font-size: 18px; margin: 25px 0 10px 0; text-align: center; color: var(--text); border-bottom: 1px solid var(--yellow); padding-bottom: 5px;}
+        .menu-category { font-family: 'PT Serif', serif; font-style: italic; font-size: 20px; margin: 25px 0 10px 0; text-align: center; color: var(--text); border-bottom: 1px solid var(--yellow); padding-bottom: 5px;}
         .menu-item { background: var(--card); border-radius: 4px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
-        .menu-title { font-family: 'PT Sans Narrow', sans-serif; font-size: 16px; font-weight: bold; text-transform: uppercase;}
-        .menu-price { font-family: 'Times New Roman', serif; font-size: 18px; font-style: italic; }
+        .menu-title { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;}
+        .menu-price { font-family: 'PT Serif', serif; font-size: 18px; font-style: italic; }
 
         .anxiety-container { background: #F9F9F9; padding: 15px; border-radius: 4px; border: 1px solid var(--border); margin-bottom: 10px;}
-        .anxiety-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-family: 'PT Sans Narrow', sans-serif; font-size: 14px; font-weight: bold; text-transform: uppercase;}
-        .anxiety-status { font-family: 'Times New Roman', serif; font-size: 16px; color: var(--text); font-style: italic; text-transform: none;}
+        .anxiety-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;}
+        .anxiety-status { font-family: 'PT Serif', serif; font-size: 16px; color: var(--text); font-style: italic; text-transform: none;}
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0; padding: 0; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 0; background: var(--yellow); border: 2px solid var(--text); cursor: pointer; margin-top: -10px; }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: var(--text-light); border-radius: 0; }
-        .anxiety-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 5px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase;}
+        .anxiety-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 5px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px;}
 
         .advice-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
         .advice-item:last-child { border-bottom: none; }
-        .advice-item h4 { font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; margin: 0 0 5px 0; font-size: 15px; }
-        .advice-item p { font-family: 'Times New Roman', serif; margin: 0; font-size: 15px; color: var(--text); line-height: 1.4;}
+        .advice-item h4 { font-family: 'Oswald', sans-serif; font-weight: 500; text-transform: uppercase; margin: 0 0 5px 0; font-size: 15px; letter-spacing: 1px;}
+        .advice-item p { font-family: 'PT Serif', serif; margin: 0; font-size: 15px; color: var(--text); line-height: 1.4;}
         
-        .history-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+        .history-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-family: 'PT Serif', serif;}
         .history-item:last-child { border-bottom: none; }
-        .history-btn { background: none; border: 1px solid var(--text); color: var(--text); border-radius: 0; padding: 5px 10px; font-size: 12px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: bold;}
+        .history-btn { background: none; border: 1px solid var(--text); color: var(--text); border-radius: 0; padding: 5px 10px; font-size: 12px; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: 500; letter-spacing: 1px;}
 
         .nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 20px 0; z-index: 100; }
-        .nav-btn { background: none; border: none; color: var(--text-light); font-family: 'PT Sans Narrow', sans-serif; font-size: 10px; font-weight: bold; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; transition: color 0.3s;}
+        .nav-btn { background: none; border: none; color: var(--text-light); font-family: 'Oswald', sans-serif; font-size: 10px; font-weight: 500; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; transition: color 0.3s; letter-spacing: 1px;}
         .nav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; transition: stroke 0.3s;}
         .nav-btn.active { color: var(--text); border-top: 2px solid var(--yellow); padding-top: 8px; margin-top: -10px;}
 
@@ -144,18 +182,18 @@
             z-index: 2000; transition: top 0.5s ease; border: 1px solid var(--text); display: flex; align-items: center; gap: 15px;
         }
         .push-notification.show { top: 20px; }
-        .push-icon { width: 40px; height: 40px; background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; font-weight: bold; font-family: 'Times New Roman'; font-size: 20px; }
+        .push-icon { width: 40px; height: 40px; background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; font-weight: 500; font-family: 'Oswald'; font-size: 20px; }
         .push-text { flex: 1; }
-        .push-title { font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: bold; font-size: 14px; margin-bottom: 2px; color: var(--text); }
-        .push-desc { font-family: 'Times New Roman', serif; font-size: 14px; color: var(--text); }
+        .push-title { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: 500; font-size: 14px; margin-bottom: 2px; color: var(--text); letter-spacing: 1px;}
+        .push-desc { font-family: 'PT Serif', serif; font-size: 14px; color: var(--text); }
     </style>
 </head>
 <body>
 
-    <!-- ЭКРАН ЗАГРУЗКИ С ТЕКСТОВЫМ ЛОГОТИПОМ -->
+    <!-- ЭКРАН ЗАГРУЗКИ С ВЫТЯНУТЫМ ЛОГОТИПОМ -->
     <div id="splash-screen">
         <div class="splash-logo">
-            <div class="logo-text">T<span class="italic">rent</span></div>
+            <div class="logo-text">Trent</div>
             <div class="logo-desc">Dental Boutique</div>
         </div>
     </div>
@@ -173,7 +211,7 @@
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
             <div class="welcome-logo">
-                <div class="logo-text-main">T<span class="italic">rent</span></div>
+                <div class="logo-text-main">Trent</div>
                 <div class="logo-desc-main">Dental Boutique</div>
             </div>
             
@@ -230,7 +268,7 @@
         <h1>Кабинет</h1>
         <div class="subtitle">Ваша история</div>
         <div class="card">
-            <div style="font-family: 'Times New Roman', serif; font-size: 20px; font-style: italic; margin-bottom: 15px;">История лечения</div>
+            <div style="font-family: 'PT Serif', serif; font-size: 20px; font-style: italic; margin-bottom: 15px;">История лечения</div>
             <div class="history-item">
                 <div><b>15 мая</b><br><span style="color: var(--text-light); font-size: 12px;">Профессиональная гигиена</span></div>
                 <button class="history-btn">Снимок</button>
@@ -241,7 +279,7 @@
             </div>
         </div>
         <div class="card">
-            <div style="font-family: 'Times New Roman', serif; font-size: 20px; font-style: italic; margin-bottom: 10px;">Гайд по уходу</div>
+            <div style="font-family: 'PT Serif', serif; font-size: 20px; font-style: italic; margin-bottom: 10px;">Гайд по уходу</div>
             <div class="advice-item">
                 <h4>Правило 2 минут</h4>
                 <p>Чистите зубы мягкой щеткой ровно 2 минуты, чтобы не повредить эмаль.</p>
@@ -258,8 +296,8 @@
         <h1>Забота</h1>
         <div class="subtitle">Бонусы и друзья</div>
         <div class="card" style="text-align: center; padding: 15px;">
-            <div style="font-size: 56px; color: var(--text); font-family: 'Times New Roman', serif; font-style: italic;">1 500 ₽</div>
-            <div style="color: var(--text-light); font-size: 12px; text-transform: uppercase; margin-bottom: 15px; font-family: 'PT Sans Narrow';">Доступно</div>
+            <div style="font-size: 56px; color: var(--text); font-family: 'PT Serif', serif; font-style: italic;">1 500 ₽</div>
+            <div style="color: var(--text-light); font-size: 12px; text-transform: uppercase; margin-bottom: 15px; font-family: 'Oswald';">Доступно</div>
             <button class="btn btn-yellow">Пригласить друга (+1000 ₽)</button>
         </div>
     </div>
@@ -284,19 +322,17 @@
     </div>
 
     <script>
-        // 1. Логика запуска: Ждем 3 секунды (3000 мс) и убираем экран загрузки
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
-                splash.classList.add('hide'); // Плавное исчезновение за 0.8 секунды (из CSS)
+                splash.classList.add('hide'); 
                 
-                // Пуш-уведомление вылезет чуть позже, через 2 секунды после открытия главного экрана
                 setTimeout(() => {
                     document.getElementById('push').classList.add('show');
                     setTimeout(() => { document.getElementById('push').classList.remove('show'); }, 5000);
                 }, 2000);
 
-            }, 3000); // Экран заглушка висит ровно 3 секунды
+            }, 3000); 
         });
 
         function showScreen(screenId, btn) {
@@ -322,19 +358,6 @@
             if(!name) { alert('Введите имя'); return; }
             alert('Спасибо, ' + name + '! Заявка принята. Администратор свяжется с вами.');
             showScreen('home', document.querySelectorAll('.nav-btn')[0]);
-        }
-
-        // Секретное нажатие на логотип (5 раз) для входа в админку
-        let clickCount = 0;
-        let clickTimer;
-        function secretClick() {
-            clickCount++;
-            clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
-            if (clickCount >= 5) {
-                document.getElementById('admin-panel').style.display = 'block';
-                clickCount = 0;
-            }
         }
     </script>
 </body>
