@@ -36,7 +36,6 @@
             background-image: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(248, 226, 125, 0.1) 20px, rgba(248, 226, 125, 0.1) 40px);
         }
 
-        /* ЭКРАН ЗАГРУЗКИ */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg); display: flex; justify-content: center; align-items: center;
@@ -50,7 +49,6 @@
         .splash-text .italic { font-style: italic; }
         @keyframes pulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.05); opacity: 1; } }
 
-        /* ЭКРАНЫ */
         .screen { display: none; padding: 20px; max-width: 500px; margin: 0 auto; }
         .screen.active { display: block; animation: smoothFade 0.5s ease forwards; }
         @keyframes smoothFade { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -93,13 +91,13 @@
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: var(--text-light); border-radius: 0; }
         .anxiety-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); margin-top: 5px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: 700;}
 
-        /* ИНДЕКС ЗДОРОВЬЯ ЗУБОВ (АНИМИРОВАННЫЙ) */
+        /* НОВЫЙ БЛОК: ИНДЕКС ЗДОРОВЬЯ ЗУБОВ */
         .health-widget { display: flex; align-items: center; justify-content: space-between; }
         .health-circle {
             position: relative; width: 90px; height: 90px; border-radius: 50%;
-            background: conic-gradient(var(--gold) 0%, var(--gold) 0%, #EBE8DC 0%, #EBE8DC 100%); /* Начинается с 0% */
+            background: conic-gradient(var(--gold) 0%, var(--gold) 0%, #EBE8DC 0%, #EBE8DC 100%);
             display: flex; justify-content: center; align-items: center;
-            transition: background 1.5s ease-in-out; /* Плавная заливка */
+            transition: background 1.5s ease-in-out;
         }
         .health-circle::before {
             content: ""; position: absolute; width: 74px; height: 74px; background: var(--card); border-radius: 50%;
@@ -180,16 +178,18 @@
         </div>
 
         <div class="admin-card">
-            <div style="color: var(--yellow); font-size: 14px; margin-bottom: 10px; font-family: 'PT Sans Narrow'; font-weight: 700;">ВРАЧ (УЛУЧШИТЬ ЗДОРОВЬЕ)</div>
+            <div style="color: var(--yellow); font-size: 14px; margin-bottom: 10px; font-family: 'PT Sans Narrow'; font-weight: 700;">ВРАЧ</div>
             <div>Пациент: <b>Анна Смирнова</b></div>
             
-            <button class="admin-btn" style="margin-top: 15px;" onclick="improveHealth()">+ Лечение (Улучшить здоровье)</button>
+            <!-- Кнопка лечения для врача -->
+            <button class="admin-btn" style="margin-top: 15px;" onclick="improveHealth()">+ Вылечить (Повысить % здоровья)</button>
             
-            <textarea id="doc-advice" placeholder="Текст рекомендации..." style="width: 100%; height: 80px; margin-top: 15px; padding: 10px; border-radius: 4px; border: none; font-family: inherit; font-size: 16px;"></textarea>
-            <button class="admin-btn" onclick="saveDocAdvice()">Отправить рекомендацию</button>
+            <textarea id="doc-advice" placeholder="Текст для пациента..." style="width: 100%; height: 80px; margin-top: 10px; padding: 10px; border-radius: 4px; border: none; font-family: inherit; font-size: 16px;"></textarea>
+            <button class="admin-btn" onclick="saveDocAdvice()">Отправить</button>
         </div>
     </div>
 
+    <!-- 1. ГЛАВНАЯ -->
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
             <div class="welcome-logo" onclick="secretClick()">
@@ -206,6 +206,7 @@
         </div>
     </div>
 
+    <!-- 2. ЗАПИСЬ -->
     <div id="screen-booking" class="screen">
         <h1>Запись</h1>
         <div class="subtitle">Выберите время</div>
@@ -224,6 +225,7 @@
         </div>
     </div>
 
+    <!-- 3. МЕНЮ -->
     <div id="screen-menu" class="screen">
         <h1>Меню</h1>
         <div class="subtitle">Услуги и цены</div>
@@ -248,7 +250,7 @@
         <p style="text-align: center; font-size: 13px; color: var(--text-light); margin-top: 20px; font-family: 'PT Sans Narrow';">* Не является публичной офертой</p>
     </div>
 
-    <!-- 4. КАБИНЕТ -->
+    <!-- 4. КАБИНЕТ (С НОВЫМ ИНДЕКСОМ ЗДОРОВЬЯ) -->
     <div id="screen-account" class="screen">
         <h1>Кабинет</h1>
         <div class="subtitle">Ваша история</div>
@@ -256,11 +258,9 @@
         <!-- ИНДЕКС ЗДОРОВЬЯ -->
         <div class="card">
             <div class="health-widget">
-                <!-- Круг и цифра -->
                 <div class="health-circle" id="health-circle">
                     <div class="health-value" id="health-value">0%</div>
                 </div>
-                <!-- Текст и статус -->
                 <div class="health-text">
                     <h4>Здоровье зубов</h4>
                     <p id="health-desc">Требуется лечение. Начните с консультации.</p>
@@ -329,22 +329,30 @@
     </div>
 
     <script>
-        // --- ИНДЕКС ЗДОРОВЬЯ ---
+        // --- ЛОГИКА ЗДОРОВЬЯ ЗУБОВ ---
         let currentHealth = 0;
-        const targetHealth = 85; // Итоговое здоровье (например, 85%)
+        // Получаем сохраненный прогресс (если врач лечил, то будет 100)
+        let targetHealth = parseInt(localStorage.getItem('trent_health')) || 25; // По умолчанию 25%
 
         function animateHealth() {
             const circle = document.getElementById('health-circle');
             const valueText = document.getElementById('health-value');
             
-            // Плавно заполняем круг
-            circle.style.background = `conic-gradient(var(--gold) 0%, var(--gold) ${targetHealth}%, #EBE8DC ${targetHealth}%, #EBE8DC 100%)`;
+            // Сброс анимации, если мы зашли повторно
+            currentHealth = 0;
+            valueText.innerText = "0%";
 
-            // Плавно увеличиваем цифру
+            // Плавная заливка круга
+            setTimeout(() => {
+                circle.style.background = `conic-gradient(var(--gold) 0%, var(--gold) ${targetHealth}%, #EBE8DC ${targetHealth}%, #EBE8DC 100%)`;
+            }, 100);
+
+            // Плавный подсчет цифр
             let interval = setInterval(() => {
                 if (currentHealth >= targetHealth) {
                     clearInterval(interval);
-                    // Меняем текст, если здоровье отличное
+                    
+                    // Меняем текст в зависимости от процента
                     if (targetHealth === 100) {
                         document.getElementById('health-desc').innerText = "Идеальное состояние. Продолжайте улыбаться!";
                         document.getElementById('health-status').innerText = "Отлично";
@@ -363,7 +371,7 @@
                     currentHealth++;
                     valueText.innerText = currentHealth + "%";
                 }
-            }, 20); // Скорость анимации
+            }, 20);
         }
 
         // Ожидаем загрузку страницы
@@ -372,23 +380,22 @@
                 const splash = document.getElementById('splash-screen');
                 splash.classList.add('hidden');
                 
-                // Запускаем анимацию здоровья, когда зашли в кабинет
                 setTimeout(() => {
                     document.getElementById('push').classList.add('show');
                     setTimeout(() => { document.getElementById('push').classList.remove('show'); }, 5000);
                 }, 1000);
                 
-                // Чтобы анимация началась сразу (или при открытии вкладки)
+                // Запускаем анимацию сразу при входе
                 animateHealth();
             }, 3000); 
         });
 
-        // --- ЭМУЛЯЦИЯ ВРАЧА (УЛУЧШЕНИЕ ЗДОРОВЬЯ) ---
+        // --- ЭМУЛЯЦИЯ ВРАЧА ---
         function improveHealth() {
-            // При нажатии кнопки врач "лечит" пациента и здоровье становится 100%
+            // Врач лечит пациента, и здоровье становится 100%
             localStorage.setItem('trent_health', 100);
+            targetHealth = 100; // Обновляем переменную
             alert('Вы добавили лечение. Здоровье пациента теперь 100%! Перезагрузите страницу (или зайдите в кабинет заново), чтобы увидеть результат.');
-            // В реальном приложении здесь была бы перезагрузка данных
             location.reload(); 
         }
 
@@ -399,12 +406,16 @@
             if(btn) btn.classList.add('active');
             window.scrollTo(0, 0);
 
-            // Если открыли кабинет - запускаем анимацию
+            // Если открыли кабинет - заново проигрываем анимацию
             if(screenId === 'account') {
-                // Сбрасываем и запускаем заново, чтобы было красиво
-                currentHealth = 0; 
                 animateHealth();
             }
         }
 
-        function updateAnxiety()
+        // ... (Остальные функции остались без изменений)
+        function updateAnxiety() {
+            const val = document.getElementById('anxiety').value;
+            const status = document.getElementById('anxiety-status');
+            if (val == 1) status.innerText = "Полный покой";
+            if (val == 2) status.innerText = "Легкое волнение";
+            if (val
