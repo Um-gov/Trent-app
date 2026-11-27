@@ -7,183 +7,128 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#FCFAED">
+
     <style>
         :root {
-            --bg: #FCFAED;
+            --bg: #FCFAED;           
             --card: #FFFFFF;         
             --text: #272727;         
             --text-light: #AFA998;   
             --yellow: #F8E27D;       
             --border: #EBE8DC;       
+            --gold: #D4AF37;
         }
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            font-family: 'PT Serif', serif;
+            font-family: 'Cormorant Garamond', serif;
             background-color: var(--bg); 
             color: var(--text); margin: 0; padding: 0;
             padding-bottom: 150px; overflow-x: hidden;
             background-image: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(248, 226, 125, 0.1) 20px, rgba(248, 226, 125, 0.1) 40px);
         }
-        
+
         /* ЭКРАН ЗАГРУЗКИ */
         #splash-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg); display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease;
         }
-
-        #splash-screen.hide {
-            opacity: 0;
-            visibility: hidden;
+        #splash-screen.hidden { opacity: 0; visibility: hidden; }
+        .splash-text {
+            font-family: 'Cormorant Garamond', serif; font-size: 90px; color: var(--text);
+            letter-spacing: -2px; animation: pulse 1.5s infinite alternate ease-in-out;
         }
+        .splash-text .italic { font-style: italic; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.05); opacity: 1; } }
 
-        .splash-logo {
-            text-align: center;
-            animation: fadeInScale 0.8s ease forwards;
-        }
-
-        .splash-logo .logo-text {
-            font-family: 'PT Sans Narrow', sans-serif;
-            font-weight: 400;
-            font-size: 85px;
-            text-transform: uppercase;
-            letter-spacing: 12px;
-            color: var(--text);
-            line-height: 1;
-            margin-bottom: 5px;
-            padding-left: 12px;
-        }
-
-        .splash-logo .logo-desc {
-            font-family: 'PT Sans Narrow', sans-serif;
-            font-weight: 400;
-            font-size: 16px;
-            letter-spacing: 14px;
-            text-transform: uppercase;
-            color: var(--text-light);
-            padding-left: 14px;
-        }
-
-        @keyframes fadeInScale {
-            0% { opacity: 0; transform: scale(0.98); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Экраны приложения */
+        /* ЭКРАНЫ */
         .screen { display: none; padding: 20px; max-width: 500px; margin: 0 auto; }
         .screen.active { display: block; animation: smoothFade 0.5s ease forwards; }
         @keyframes smoothFade { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         
-        h1 { 
-            font-family: 'PT Sans Narrow', sans-serif; 
-            font-weight: 700; 
-            font-size: 38px; 
-            text-transform: uppercase; 
-            margin: 10px 0 8px 0; 
-            text-align: center; 
-            letter-spacing: 2px;
-        }
-        
-        .subtitle { font-family: 'PT Serif', serif; font-size: 14px; color: var(--text-light); font-style: italic; margin-bottom: 25px; text-align: center; }
+        h1 { font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; font-size: 28px; text-transform: uppercase; margin: 10px 0 8px 0; text-align: center; letter-spacing: 2px; }
+        .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-light); font-style: italic; margin-bottom: 25px; text-align: center; }
         
         .card { background: var(--card); border-radius: 4px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid var(--border); }
         
         .form-group { margin-bottom: 15px; }
-        label { font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; display: block; font-size: 13px; color: var(--text); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
-        
-        input, select, textarea {
-            width: 100%; padding: 15px; border: 1px solid var(--border); border-radius: 4px;
-            font-size: 16px; background: #F9F9F9; outline: none; font-family: 'PT Serif', serif; transition: all 0.4s ease;
-        }
+        label { font-family: 'PT Sans Narrow', sans-serif; display: block; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        input, select, textarea { width: 100%; padding: 15px; border: 1px solid var(--border); border-radius: 4px; font-size: 18px; background: #F9F9F9; outline: none; font-family: 'Cormorant Garamond', serif; transition: all 0.4s ease; }
         input:focus, select:focus, textarea:focus { border-color: var(--text); background: #fff; }
 
-        .btn { width: 100%; padding: 16px; background: var(--text); color: white; border: none; border-radius: 4px; font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; letter-spacing: 1px;}
+        .btn { width: 100%; padding: 16px; background: var(--text); color: white; border: none; border-radius: 4px; font-family: 'PT Sans Narrow', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; letter-spacing: 1px; }
         .btn:active { transform: scale(0.98); opacity: 0.9; }
         .btn-yellow { background: var(--yellow); color: var(--text); }
         .btn-good { background: #E8F5E9; color: #2E7D32; }
         .btn-bad { background: #FFEBEE; color: #C62828; }
 
-        .welcome-container { text-align: center; padding-top: 10px; }
-        
-        .logo-text-main { 
-            font-family: 'PT Sans Narrow', sans-serif; 
-            font-weight: 400; 
-            font-size: 75px; 
-            text-transform: uppercase; 
-            letter-spacing: 8px;
-            margin-bottom: 0; 
-            color: var(--text); 
-            line-height: 1; 
-            padding-left: 8px;
-        }
-        .logo-desc-main { 
-            font-family: 'PT Sans Narrow', sans-serif; 
-            font-weight: 400; 
-            font-size: 14px; 
-            letter-spacing: 12px; 
-            text-transform: uppercase; 
-            color: var(--text-light); 
-            margin-bottom: 30px; 
-            padding-left: 12px;
-        }
+        .welcome-container { text-align: center; padding-top: 20px; }
+        .logo-text { font-family: 'Cormorant Garamond', serif; font-size: 72px; margin-bottom: 0; letter-spacing: -1px; color: var(--text); line-height: 1; }
+        .logo-text .italic { font-style: italic; }
+        .logo-desc { font-family: 'PT Sans Narrow', sans-serif; font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--text); margin-bottom: 30px; font-weight: 700;}
 
         .highlight { background-color: var(--yellow); padding: 0 5px; display: inline; line-height: 1.2; }
-        .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; font-size: 16px; text-align: center; letter-spacing: 1px;}
-        
-        .welcome-manifest { font-family: 'PT Serif', serif; font-style: italic; font-size: 18px; line-height: 1.4; margin-bottom: 25px; color: var(--text); }
+        .promo-banner { background: var(--yellow); color: var(--text); padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; font-size: 15px; text-align: center; letter-spacing: 0.5px;}
+        .welcome-manifest { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; line-height: 1.3; margin-bottom: 25px; color: var(--text); }
 
-        .menu-category { font-family: 'PT Serif', serif; font-style: italic; font-size: 20px; margin: 25px 0 10px 0; text-align: center; color: var(--text); border-bottom: 1px solid var(--yellow); padding-bottom: 5px;}
+        .menu-category { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; margin: 25px 0 10px 0; text-align: center; color: var(--text); border-bottom: 1px solid var(--yellow); padding-bottom: 5px;}
         .menu-item { background: var(--card); border-radius: 4px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
-        .menu-title { font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;}
-        .menu-price { font-family: 'PT Serif', serif; font-size: 18px; font-style: italic; }
+        .menu-title { font-family: 'PT Sans Narrow', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+        .menu-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; }
 
         .anxiety-container { background: #F9F9F9; padding: 15px; border-radius: 4px; border: 1px solid var(--border); margin-bottom: 10px;}
-        .anxiety-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;}
-        .anxiety-status { font-family: 'PT Serif', serif; font-size: 16px; color: var(--text); font-style: italic; text-transform: none; font-weight: 400;}
+        .anxiety-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-family: 'PT Sans Narrow', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase;}
+        .anxiety-status { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--text); font-style: italic; text-transform: none; font-weight: 400;}
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0; padding: 0; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 0; background: var(--yellow); border: 2px solid var(--text); cursor: pointer; margin-top: -10px; }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: var(--text-light); border-radius: 0; }
-        .anxiety-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); margin-top: 5px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; letter-spacing: 1px;}
+        .anxiety-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-light); margin-top: 5px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: 700;}
+
+        /* ИНДЕКС ЗДОРОВЬЯ ЗУБОВ (АНИМИРОВАННЫЙ) */
+        .health-widget { display: flex; align-items: center; justify-content: space-between; }
+        .health-circle {
+            position: relative; width: 90px; height: 90px; border-radius: 50%;
+            background: conic-gradient(var(--gold) 0%, var(--gold) 0%, #EBE8DC 0%, #EBE8DC 100%); /* Начинается с 0% */
+            display: flex; justify-content: center; align-items: center;
+            transition: background 1.5s ease-in-out; /* Плавная заливка */
+        }
+        .health-circle::before {
+            content: ""; position: absolute; width: 74px; height: 74px; background: var(--card); border-radius: 50%;
+        }
+        .health-value {
+            position: relative; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--text);
+        }
+        .health-text { flex: 1; padding-left: 20px; }
+        .health-text h4 { font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-size: 16px; margin: 0 0 5px 0; }
+        .health-text p { font-family: 'Cormorant Garamond', serif; font-size: 16px; margin: 0; color: var(--text-light); line-height: 1.3;}
+        .health-status { display: inline-block; margin-top: 8px; padding: 3px 8px; background: #E8F5E9; color: #2E7D32; font-family: 'PT Sans Narrow', sans-serif; font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;}
 
         .advice-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
         .advice-item:last-child { border-bottom: none; }
-        .advice-item h4 { font-family: 'PT Sans Narrow', sans-serif; font-weight: 700; text-transform: uppercase; margin: 0 0 5px 0; font-size: 15px; letter-spacing: 1px;}
-        .advice-item p { font-family: 'PT Serif', serif; margin: 0; font-size: 15px; color: var(--text); line-height: 1.4;}
-
-        /* История лечения и файлы */
-        .history-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border); font-size: 15px; font-family: 'PT Serif', serif;}
+        .advice-item h4 { font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; margin: 0 0 5px 0; font-size: 16px; font-weight: 700;}
+        .advice-item p { font-family: 'Cormorant Garamond', serif; margin: 0; font-size: 18px; color: var(--text); line-height: 1.3;}
+        
+        .history-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 16px; }
         .history-item:last-child { border-bottom: none; }
-        
-        /* Бейджи для типов записей */
-        .badge { display: inline-block; padding: 3px 8px; border-radius: 2px; font-family: 'PT Sans Narrow', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
-        .badge-yellow { background: var(--yellow); color: var(--text); }
-        .badge-grey { background: #F0F0F0; color: var(--text-light); }
+        .history-btn { background: none; border: 1px solid var(--text); color: var(--text); border-radius: 0; padding: 5px 10px; font-size: 13px; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: 700;}
 
-        /* Кнопки прикрепленных файлов */
-        .file-btn { 
-            background: none; border: 1px solid var(--text-light); color: var(--text); border-radius: 4px; 
-            padding: 6px 12px; font-size: 13px; font-family: 'PT Sans Narrow', sans-serif; 
-            text-transform: uppercase; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;
-            transition: all 0.3s ease;
-        }
-        .file-btn:hover { background: var(--border); }
-        
-        /* Кнопка для КТ (выделенная) */
-        .file-btn.kt-btn { border-color: var(--text); background: var(--bg); }
-        .file-btn.kt-btn:hover { background: var(--yellow); }
+        #admin-panel { display: none; background: var(--text); color: white; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; overflow-y: auto; padding: 20px; padding-bottom: 100px;}
+        #admin-panel h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; margin-bottom: 20px; color: var(--yellow); }
+        .admin-card { background: #333; border-radius: 4px; padding: 15px; margin-bottom: 15px; font-family: 'Cormorant Garamond', serif; font-size: 18px;}
+        .admin-btn { background: var(--yellow); color: var(--text); padding: 10px; border-radius: 0; border: none; font-weight: 700; margin-top: 10px; width: 100%; font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase;}
+        .close-admin { position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 30px; cursor: pointer; }
 
         .nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0 20px 0; z-index: 100; }
-        .nav-btn { background: none; border: none; color: var(--text-light); font-family: 'PT Sans Narrow', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; transition: color 0.3s; letter-spacing: 1px;}
+        .nav-btn { background: none; border: none; color: var(--text-light); font-family: 'PT Sans Narrow', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 20%; transition: color 0.3s; letter-spacing: 0.5px;}
         .nav-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; transition: stroke 0.3s;}
         .nav-btn.active { color: var(--text); border-top: 2px solid var(--yellow); padding-top: 8px; margin-top: -10px;}
 
@@ -194,19 +139,16 @@
             z-index: 2000; transition: top 0.5s ease; border: 1px solid var(--text); display: flex; align-items: center; gap: 15px;
         }
         .push-notification.show { top: 20px; }
-        .push-icon { width: 40px; height: 40px; background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; font-weight: 700; font-family: 'PT Sans Narrow'; font-size: 20px; }
+        .push-icon { width: 40px; height: 40px; background: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; font-weight: bold; font-family: 'Cormorant Garamond'; font-size: 24px; }
         .push-text { flex: 1; }
-        .push-title { font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 15px; margin-bottom: 2px; color: var(--text); letter-spacing: 1px;}
-        .push-desc { font-family: 'PT Serif', serif; font-size: 14px; color: var(--text); }
+        .push-title { font-family: 'PT Sans Narrow', sans-serif; text-transform: uppercase; font-weight: 700; font-size: 15px; margin-bottom: 2px; color: var(--text); }
+        .push-desc { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text); }
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
-        <div class="splash-logo">
-            <div class="logo-text">Trent</div>
-            <div class="logo-desc">Dental Boutique</div>
-        </div>
+        <div class="splash-text">T<span class="italic">rent</span></div>
     </div>
 
     <div id="push" class="push-notification">
@@ -217,12 +159,42 @@
         </div>
     </div>
 
-    <!-- 1. ГЛАВНАЯ -->
+    <!-- СКРЫТАЯ ПАНЕЛЬ -->
+    <div id="admin-panel">
+        <button class="close-admin" onclick="closeAdmin()">×</button>
+        <h2>Trent Admin</h2>
+        
+        <div class="admin-card">
+            <div style="color: var(--yellow); font-size: 14px; margin-bottom: 10px; font-family: 'PT Sans Narrow'; font-weight: 700;">ВЛАДЕЛЕЦ</div>
+            <div>Скачиваний: <b>148</b></div>
+            <div>Записей: <b>34</b></div>
+        </div>
+
+        <div class="admin-card">
+            <div style="color: var(--yellow); font-size: 14px; margin-bottom: 10px; font-family: 'PT Sans Narrow'; font-weight: 700;">АДМИНИСТРАТОР</div>
+            <div style="border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 10px;">
+                <b>Анна Смирнова</b><br>
+                <span style="font-size: 14px; color: #aaa;">Записалась через приложение</span><br>
+                <button class="admin-btn" onclick="alert('Звонок...')">Позвонить</button>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div style="color: var(--yellow); font-size: 14px; margin-bottom: 10px; font-family: 'PT Sans Narrow'; font-weight: 700;">ВРАЧ (УЛУЧШИТЬ ЗДОРОВЬЕ)</div>
+            <div>Пациент: <b>Анна Смирнова</b></div>
+            
+            <button class="admin-btn" style="margin-top: 15px;" onclick="improveHealth()">+ Лечение (Улучшить здоровье)</button>
+            
+            <textarea id="doc-advice" placeholder="Текст рекомендации..." style="width: 100%; height: 80px; margin-top: 15px; padding: 10px; border-radius: 4px; border: none; font-family: inherit; font-size: 16px;"></textarea>
+            <button class="admin-btn" onclick="saveDocAdvice()">Отправить рекомендацию</button>
+        </div>
+    </div>
+
     <div id="screen-home" class="screen active">
         <div class="welcome-container">
-            <div class="welcome-logo">
-                <div class="logo-text-main">Trent</div>
-                <div class="logo-desc-main">Dental Boutique</div>
+            <div class="welcome-logo" onclick="secretClick()">
+                <div class="logo-text">T<span class="italic">rent</span></div>
+                <div class="logo-desc">Dental Boutique</div>
             </div>
             
             <div class="promo-banner">
@@ -234,7 +206,6 @@
         </div>
     </div>
 
-    <!-- 2. ЗАПИСЬ -->
     <div id="screen-booking" class="screen">
         <h1>Запись</h1>
         <div class="subtitle">Выберите время</div>
@@ -253,98 +224,88 @@
         </div>
     </div>
 
-    <!-- 3. МЕНЮ -->
     <div id="screen-menu" class="screen">
         <h1>Меню</h1>
         <div class="subtitle">Услуги и цены</div>
         
         <div class="menu-category">Консультация</div>
         <div class="menu-item"><div class="menu-title">Консультация врача</div><div class="menu-price">3 000 ₽</div></div>
+        
         <div class="menu-category">Диагностика</div>
         <div class="menu-item"><div class="menu-title">Компьютерная томография</div><div class="menu-price">7 000 ₽</div></div>
+        
         <div class="menu-category">Терапия</div>
         <div class="menu-item"><div class="menu-title">Профессиональная гигиена</div><div class="menu-price">15 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Обучение домашней гигиене</div><div class="menu-price">3 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Профессиональное отбеливание</div><div class="menu-price">45 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Лечение кариеса</div><div class="menu-price">от 15 000 ₽</div></div>
+        <div class="menu-item"><div class="menu-title">Художественная реставрация</div><div class="menu-price">от 20 000 ₽</div></div>
+        
         <div class="menu-category">Ортопедия</div>
         <div class="menu-item"><div class="menu-title">Винир</div><div class="menu-price">от 85 000 ₽</div></div>
         <div class="menu-item"><div class="menu-title">Коронка</div><div class="menu-price">75 000 ₽</div></div>
-        <p style="text-align: center; font-size: 11px; color: var(--text-light); margin-top: 20px;">* Не является публичной офертой</p>
+        
+        <p style="text-align: center; font-size: 13px; color: var(--text-light); margin-top: 20px; font-family: 'PT Sans Narrow';">* Не является публичной офертой</p>
     </div>
 
-    <!-- 4. ЛИЧНЫЙ КАБИНЕТ -->
+    <!-- 4. КАБИНЕТ -->
     <div id="screen-account" class="screen">
         <h1>Кабинет</h1>
         <div class="subtitle">Ваша история</div>
         
+        <!-- ИНДЕКС ЗДОРОВЬЯ -->
         <div class="card">
-            <div style="font-family: 'PT Serif', serif; font-size: 20px; font-style: italic; margin-bottom: 10px;">История лечения</div>
-            
-            <!-- Запись 1: Консультация с КТ -->
-            <div class="history-item">
-                <div>
-                    <span class="badge badge-yellow">Консультация</span><br>
-                    <b>14 июня</b> <br>
-                    <span style="color: var(--text-light); font-size: 13px;">Врач: Смирнов А.В.</span>
+            <div class="health-widget">
+                <!-- Круг и цифра -->
+                <div class="health-circle" id="health-circle">
+                    <div class="health-value" id="health-value">0%</div>
                 </div>
-                <!-- Кнопка с иконкой документа для КТ -->
-                <button class="file-btn kt-btn" onclick="alert('Открываю файл КТ (.dcm) для просмотра...')">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    КТ
-                </button>
-            </div>
-
-            <!-- Запись 2: Гигиена с фото -->
-            <div class="history-item">
-                <div>
-                    <span class="badge badge-grey">Гигиена</span><br>
-                    <b>15 мая</b> <br>
-                    <span style="color: var(--text-light); font-size: 13px;">Профессиональная гигиена</span>
+                <!-- Текст и статус -->
+                <div class="health-text">
+                    <h4>Здоровье зубов</h4>
+                    <p id="health-desc">Требуется лечение. Начните с консультации.</p>
+                    <span class="health-status" id="health-status">Требуется уход</span>
                 </div>
-                <!-- Кнопка с иконкой фото -->
-                <button class="file-btn" onclick="alert('Открываю фотографию...')">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                    Фото
-                </button>
-            </div>
-
-            <!-- Запись 3: Лечение кариеса с фото -->
-            <div class="history-item">
-                <div>
-                    <span class="badge badge-grey">Лечение</span><br>
-                    <b>10 апреля</b> <br>
-                    <span style="color: var(--text-light); font-size: 13px;">Лечение кариеса</span>
-                </div>
-                <!-- Кнопка с иконкой фото -->
-                <button class="file-btn" onclick="alert('Открываю фотографию...')">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                    Фото
-                </button>
             </div>
         </div>
 
         <div class="card">
-            <div style="font-family: 'PT Serif', serif; font-size: 20px; font-style: italic; margin-bottom: 10px;">Гайд по уходу</div>
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; margin-bottom: 15px;">История лечения</div>
+            <div class="history-item">
+                <div><b>15 мая</b><br><span style="color: var(--text-light); font-size: 14px;">Профессиональная гигиена</span></div>
+                <button class="history-btn" onclick="alert('Открываю снимок...')">Снимок</button>
+            </div>
+            <div class="history-item">
+                <div><b>10 апреля</b><br><span style="color: var(--text-light); font-size: 14px;">Лечение кариеса</span></div>
+                <button class="history-btn" onclick="alert('Открываю снимок...')">Снимок</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; margin-bottom: 10px;">Гайд по уходу</div>
             <div class="advice-item">
                 <h4>Правило 2 минут</h4>
-                <p>Чистите зубы мягкой щеткой ровно 2 минуты, чтобы не повредить эмаль.</p>
-            </div>
-            <div class="advice-item">
-                <h4>После отбеливания</h4>
-                <p>Первые 48 часов избегайте кофе, чая и красного вина.</p>
+                <p>Чистите зубы мягкой щеткой ровно 2 минуты.</p>
             </div>
         </div>
     </div>
 
-    <!-- 5. ЗАБОТА -->
+    <!-- 5. БОНУСЫ -->
     <div id="screen-bonus" class="screen">
         <h1>Забота</h1>
         <div class="subtitle">Бонусы и друзья</div>
         <div class="card" style="text-align: center; padding: 15px;">
-            <div style="font-size: 56px; color: var(--text); font-family: 'PT Serif', serif; font-style: italic;">1 500 ₽</div>
-            <div style="color: var(--text-light); font-size: 13px; text-transform: uppercase; margin-bottom: 15px; font-family: 'PT Sans Narrow';">Доступно</div>
-            <button class="btn btn-yellow">Пригласить друга (+1000 ₽)</button>
+            <div style="font-size: 64px; color: var(--text); font-family: 'Cormorant Garamond', serif; font-style: italic;">1 500 ₽</div>
+            <div style="color: var(--text-light); font-size: 13px; text-transform: uppercase; margin-bottom: 15px; font-family: 'PT Sans Narrow'; font-weight: 700;">Доступно</div>
+            <button class="btn btn-yellow" onclick="alert('Ваша ссылка скопирована!')">Пригласить друга (+1000 ₽)</button>
+        </div>
+
+        <div class="card">
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 10px;">Как прошел визит?</div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-good" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Спасибо! +500 бонусов.')">Всё отлично</button>
+                <button class="btn btn-bad" style="flex: 1; padding: 12px; font-size: 14px;" onclick="alert('Администратор свяжется с вами.')">Было плохо</button>
+            </div>
         </div>
     </div>
 
@@ -368,18 +329,68 @@
     </div>
 
     <script>
+        // --- ИНДЕКС ЗДОРОВЬЯ ---
+        let currentHealth = 0;
+        const targetHealth = 85; // Итоговое здоровье (например, 85%)
+
+        function animateHealth() {
+            const circle = document.getElementById('health-circle');
+            const valueText = document.getElementById('health-value');
+            
+            // Плавно заполняем круг
+            circle.style.background = `conic-gradient(var(--gold) 0%, var(--gold) ${targetHealth}%, #EBE8DC ${targetHealth}%, #EBE8DC 100%)`;
+
+            // Плавно увеличиваем цифру
+            let interval = setInterval(() => {
+                if (currentHealth >= targetHealth) {
+                    clearInterval(interval);
+                    // Меняем текст, если здоровье отличное
+                    if (targetHealth === 100) {
+                        document.getElementById('health-desc').innerText = "Идеальное состояние. Продолжайте улыбаться!";
+                        document.getElementById('health-status').innerText = "Отлично";
+                        document.getElementById('health-status').style.background = "#D4AF37";
+                        document.getElementById('health-status').style.color = "#fff";
+                    } else if (targetHealth > 50) {
+                        document.getElementById('health-desc').innerText = "Хорошее состояние. Рекомендуется профилактика.";
+                        document.getElementById('health-status').innerText = "Удовлетворительно";
+                    } else {
+                        document.getElementById('health-desc').innerText = "Требуется лечение.";
+                        document.getElementById('health-status').innerText = "Требуется уход";
+                        document.getElementById('health-status').style.background = "#FFEBEE";
+                        document.getElementById('health-status').style.color = "#C62828";
+                    }
+                } else {
+                    currentHealth++;
+                    valueText.innerText = currentHealth + "%";
+                }
+            }, 20); // Скорость анимации
+        }
+
+        // Ожидаем загрузку страницы
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
-                splash.classList.add('hide'); 
+                splash.classList.add('hidden');
                 
+                // Запускаем анимацию здоровья, когда зашли в кабинет
                 setTimeout(() => {
                     document.getElementById('push').classList.add('show');
                     setTimeout(() => { document.getElementById('push').classList.remove('show'); }, 5000);
-                }, 2000);
-
-            }, 2000); 
+                }, 1000);
+                
+                // Чтобы анимация началась сразу (или при открытии вкладки)
+                animateHealth();
+            }, 3000); 
         });
+
+        // --- ЭМУЛЯЦИЯ ВРАЧА (УЛУЧШЕНИЕ ЗДОРОВЬЯ) ---
+        function improveHealth() {
+            // При нажатии кнопки врач "лечит" пациента и здоровье становится 100%
+            localStorage.setItem('trent_health', 100);
+            alert('Вы добавили лечение. Здоровье пациента теперь 100%! Перезагрузите страницу (или зайдите в кабинет заново), чтобы увидеть результат.');
+            // В реальном приложении здесь была бы перезагрузка данных
+            location.reload(); 
+        }
 
         function showScreen(screenId, btn) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -387,24 +398,13 @@
             document.getElementById('screen-' + screenId).classList.add('active');
             if(btn) btn.classList.add('active');
             window.scrollTo(0, 0);
+
+            // Если открыли кабинет - запускаем анимацию
+            if(screenId === 'account') {
+                // Сбрасываем и запускаем заново, чтобы было красиво
+                currentHealth = 0; 
+                animateHealth();
+            }
         }
 
-        function updateAnxiety() {
-            const val = document.getElementById('anxiety').value;
-            const status = document.getElementById('anxiety-status');
-            if (val == 1) status.innerText = "Полный покой";
-            if (val == 2) status.innerText = "Легкое волнение";
-            if (val == 3) status.innerText = "Нервничаю";
-            if (val == 4) status.innerText = "Боюсь";
-            if (val == 5) status.innerText = "Очень боюсь";
-        }
-
-        function saveData() {
-            const name = document.getElementById('name').value;
-            if(!name) { alert('Введите имя'); return; }
-            alert('Спасибо, ' + name + '! Заявка принята. Администратор свяжется с вами.');
-            showScreen('home', document.querySelectorAll('.nav-btn')[0]);
-        }
-    </script>
-</body>
-</html>
+        function updateAnxiety()
